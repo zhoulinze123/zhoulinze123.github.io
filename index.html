@@ -1,7 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>润林牧场</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 15px;
+    }
+    .slider {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .slides {
+      display: flex;
+      width: 400%;
+      animation: slide 12s infinite;
+    }
+    .slides img {
+      width: 25%;
+      height: 220px;
+      object-fit: cover;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-25%); }
+      50% { transform: translateX(-50%); }
+      75% { transform: translateX(-75%); }
+      100% { transform: translateX(0); }
+    }
+    .header {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      padding: 25px 20px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    h1 {
+      color: #2c3e50;
+      font-size: 26px;
+      margin: 0 0 8px;
+    }
+    .subtitle {
+      color: #e67e22;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      font-size: 18px;
+      color: #2c3e50;
+      margin: 0 0 12px;
+      border-left: 4px solid #e67e22;
+      padding-left: 10px;
+    }
+    .card p {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.8;
+      margin: 6px 0;
+    }
+    .price {
+      color: #e67e22;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .btn {
+      display: block;
+      background: #e67e22;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 14px;
+    }
+    .btn-share { background: #3498db; }
+    .btn-copy { background: #95a5a6; }
+    .contact {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 2;
+    }
+    .footer {
+      text-align: center;
+      color: #999;
+      font-size: 12px;
+      margin-top: 10px;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
 <body>
-  <h1>我的主页</h1>
-  <p>欢迎来到我的GitHub网页！</p>
+  <div class="container">
+
+    <!-- 轮播图 -->
+    <div class="slider">
+      <div class="slides">
+        <img src="pig1.jpg" alt="牧场1">
+        <img src="pig2.jpg" alt="牧场2">
+        <img src="pig3.jpg" alt="牧场3">
+        <img src="pig4.jpg" alt="牧场4">
+      </div>
+    </div>
+
+    <!-- 顶部标题 -->
+    <div class="header">
+      <h1>🐷 润林牧场</h1>
+      <div class="subtitle">精心代养 · 黑猪特生</div>
+    </div>
+
+    <!-- 代养服务 -->
+    <div class="card">
+      <h2>🐖 黑猪代养</h2>
+      <p>我们提供专业的黑猪代养服务，从幼崽到出栏全程精心照料，让您省心放心。</p>
+      <p><b>代养周期：</b>6-12个月（可协商）</p>
+      <p><b>代养方式：</b>生态放养 + 粗粮喂养</p>
+      <p class="price">代养价格：面议（欢迎咨询）</p>
+      <a class="btn" href="tel:待补充">📞 立即预定代养</a>
+    </div>
+
+    <!-- 预定说明 -->
+    <div class="card">
+      <h2>📦 预定说明</h2>
+      <p>支持整头预定、半头预定，年底统一屠宰配送，新鲜到家。</p>
+      <p><b>预定流程：</b>联系咨询 → 确认数量 → 支付定金 → 出栏交付</p>
+      <div class="contact">
+        📍 地址：待补充<br>
+        📞 电话：待补充<br>
+        💬 微信：待补充
+      </div>
+      <a class="btn" href="tel:待补充">📞 拨打电话预定</a>
+    </div>
+
+    <!-- 分享功能 -->
+    <div class="card">
+      <h2>📤 分享润林牧场</h2>
+      <p>把好内容分享给更多朋友，让更多人了解我们的黑猪代养服务。</p>
+      <a class="btn btn-share" href="#" onclick="shareApp()">📤 系统分享</a>
+      <a class="btn btn-copy" href="#" onclick="copyLink()">🔗 复制链接</a>
+    </div>
+
+    <div class="footer">
+      © 2024 润林牧场 · 用心做好每一头猪
+    </div>
+  </div>
+
+  <script>
+    function shareApp() {
+      if (navigator.share) {
+        navigator.share({
+          title: '润林牧场 - 黑猪代养',
+          text: '精心代养，黑猪特生。欢迎了解我们的代养服务！',
+          url: 'https://zhoulinze123.github.io'
+        });
+      } else {
+        copyLink();
+        alert('已复制链接，可以粘贴分享给好友！');
+      }
+    }
+    function copyLink() {
+      var input = document.createElement('input');
+      input.value = 'https://zhoulinze123.github.io';
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      alert('链接已复制到剪贴板！');
+    }
+  </script>
 </body>
 </html>
