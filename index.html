@@ -5,468 +5,317 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>润林牧场 · 鲜肉商城</title>
 <meta name="theme-color" content="#8B4513">
-<link rel="manifest" href="manifest.json">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333;padding-bottom:60px}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333;padding-bottom:60px;font-size:14px}
 .header{background:linear-gradient(135deg,#8B4513,#A0522D);color:#fff;padding:12px 15px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.header-top{display:flex;align-items:center;justify-content:space-between}
 .header h1{font-size:18px;font-weight:700}
-.weather-bar{font-size:12px;opacity:.95;cursor:pointer}
-.search-box{background:rgba(255,255,255,.15);border-radius:20px;padding:6px 12px;display:flex;align-items:center;gap:6px;font-size:13px;margin-top:8px}
+.weather-bar{font-size:12px;opacity:.95;cursor:pointer;background:rgba(255,255,255,.15);padding:4px 8px;border-radius:12px}
+.search-box{background:rgba(255,255,255,.15);border-radius:20px;padding:6px 12px;display:flex;align-items:center;gap:6px;margin-top:8px}
 .search-box input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:13px}
 .search-box input::placeholder{color:rgba(255,255,255,.7)}
+.search-btn{background:#FF8C00;color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px}
 .page{display:none;padding:10px}
 .page.active{display:block}
-.banner{background:linear-gradient(135deg,#FF8C00,#FF6B35);border-radius:12px;padding:15px;color:#fff;margin-bottom:12px;position:relative;overflow:hidden}
-.banner::after{content:"🐷";position:absolute;right:15px;top:50%;transform:translateY(-50%);font-size:48px;opacity:.3}
+.banner{background:linear-gradient(135deg,#FF8C00,#FF6B35);border-radius:12px;padding:15px;color:#fff;margin-bottom:12px}
 .banner h2{font-size:20px;margin-bottom:6px}
 .banner p{font-size:13px;opacity:.95}
 .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
-.cat-item{background:#fff;border-radius:10px;padding:10px 5px;text-align:center;font-size:12px;cursor:pointer;transition:.2s}
+.cat-item{background:#fff;border-radius:10px;padding:10px 5px;text-align:center;font-size:12px;cursor:pointer}
 .cat-item.active{background:#8B4513;color:#fff}
-.cat-item:hover{transform:translateY(-2px)}
-.cat-icon{font-size:24px;margin-bottom:4px}
-.goods-list{display:grid;grid-template-columns:1fr;gap:10px}
-.goods-card{background:#fff;border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center;cursor:pointer}
-.goods-img{width:70px;height:70px;border-radius:8px;background:linear-gradient(135deg,#f0f0f0,#e0e0e0);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
-.goods-info{flex:1;min-width:0}
+.goods-card{background:#fff;border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.goods-img{width:70px;height:70px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
+.goods-info{flex:1}
 .goods-name{font-weight:600;font-size:15px;margin-bottom:3px}
-.goods-desc{font-size:12px;color:#888;margin-bottom:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.goods-price{color:#e53935;font-weight:700;font-size:16px}
-.goods-price small{font-size:12px;color:#999;font-weight:400;margin-left:4px;text-decoration:line-through}
-.goods-btn{background:#8B4513;color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:12px;cursor:pointer;flex-shrink:0}
+.goods-desc{font-size:12px;color:#888;margin-bottom:5px}
+.goods-price{color:#d2691e;font-weight:700;font-size:16px}
 .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
-.tool-card{background:#fff;border-radius:10px;padding:15px 10px;text-align:center;cursor:pointer;transition:.2s}
-.tool-card:active{transform:scale(.95)}
-.tool-icon{font-size:28px;margin-bottom:6px}
-.tool-label{font-size:13px;font-weight:500}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;z-index:100;height:55px}
-.nav-item{flex:1;text-align:center;padding:6px 0;cursor:pointer;font-size:11px;color:#999}
+.tool-card{background:#fff;border-radius:10px;padding:12px 5px;text-align:center;font-size:12px;cursor:pointer}
+.tool-card:active{background:#f0f0f0}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:8px 0;z-index:100}
+.nav-item{text-align:center;font-size:11px;color:#666;cursor:pointer}
 .nav-item.active{color:#8B4513}
-.nav-icon{font-size:22px;margin-bottom:2px}
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end}
-.modal-overlay.active{display:flex}
-.modal-content{background:#fff;border-radius:16px 16px 0 0;width:100%;max-height:85vh;overflow-y:auto;padding:20px;animation:slideUp .3s ease}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-title{font-size:18px;font-weight:700;margin-bottom:15px;text-align:center}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;font-size:13px;font-weight:500;margin-bottom:4px;color:#555}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none}
-.form-group textarea{resize:vertical;min-height:70px}
-.btn-primary{background:linear-gradient(135deg,#8B4513,#A0522D);color:#fff;border:none;border-radius:25px;padding:12px 30px;font-size:16px;font-weight:600;cursor:pointer;width:100%;margin-top:10px}
-.btn-primary:active{transform:scale(.98)}
-.btn-secondary{background:#f5f5f5;color:#333;border:none;border-radius:25px;padding:10px 20px;font-size:14px;cursor:pointer;width:100%;margin-top:8px}
-.msg-item{background:#fff;border-radius:10px;padding:12px;margin-bottom:10px}
-.msg-item .msg-name{font-weight:600;font-size:14px;margin-bottom:4px}
-.msg-item .msg-time{font-size:11px;color:#999;margin-bottom:6px}
-.msg-item .msg-content{font-size:13px;color:#555;line-height:1.5}
-.empty-tip{text-align:center;padding:40px 20px;color:#999;font-size:14px}
-.empty-tip .empty-icon{font-size:48px;margin-bottom:10px}
-.city-picker{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.city-picker select{padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px}
-/* 科普页面专用样式 */
-.edu-hero{background:linear-gradient(135deg,#8B4513,#D2691E);border-radius:12px;padding:20px 15px;color:#fff;margin-bottom:15px;text-align:center}
-.edu-hero h2{font-size:22px;margin-bottom:8px}
-.edu-hero p{font-size:13px;opacity:.9}
-.compare-table{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:15px}
-.compare-table .table-title{background:#8B4513;color:#fff;padding:12px;text-align:center;font-size:15px;font-weight:600}
-.compare-table table{width:100%;border-collapse:collapse}
-.compare-table th,.compare-table td{padding:10px 8px;text-align:center;font-size:12px;border-bottom:1px solid #f0f0f0}
-.compare-table th{background:#fafafa;font-weight:600;color:#8B4513}
-.compare-table tr:last-child td{border-bottom:none}
-.tag-yes{color:#4CAF50;font-weight:600}
-.tag-no{color:#e53935;font-weight:600}
-.feature-card{background:#fff;border-radius:12px;padding:15px;margin-bottom:12px}
-.feature-card h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#8B4513}
-.feature-card p,.feature-card li{font-size:13px;color:#555;line-height:1.8}
-.feature-card ul{padding-left:18px}
-.taste-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.taste-item{background:#FFF8F0;border-radius:8px;padding:12px;text-align:center}
-.taste-item .taste-icon{font-size:28px;margin-bottom:6px}
-.taste-item .taste-label{font-size:12px;font-weight:600;color:#8B4513;margin-bottom:3px}
-.taste-item .taste-desc{font-size:11px;color:#888}
-.edu-cta{background:linear-gradient(135deg,#FF6B35,#e53935);border-radius:12px;padding:15px;text-align:center;color:#fff;margin-top:15px}
-.edu-cta h3{font-size:16px;margin-bottom:8px}
-.edu-cta p{font-size:12px;opacity:.9;margin-bottom:12px}
-.edu-cta .btn-cta{background:#fff;color:#e53935;border:none;border-radius:25px;padding:10px 30px;font-size:14px;font-weight:600;cursor:pointer}
+.nav-icon{font-size:20px;margin-bottom:2px}
+.promo-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;padding:20px;overflow-y:auto}
+.promo-modal.active{display:block}
+.promo-content{background:#fff;border-radius:12px;padding:15px;margin-top:20px;max-width:500px;margin-left:auto;margin-right:auto}
+.promo-tabs{display:flex;gap:8px;margin-bottom:12px}
+.promo-tab{padding:6px 12px;border-radius:20px;background:#f0f0f0;font-size:13px;cursor:pointer;border:none}
+.promo-tab.active{background:#8B4513;color:#fff}
+.compare-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px}
+.compare-table th,.compare-table td{border:1px solid #ddd;padding:6px;text-align:center}
+.compare-table th{background:#f8f8f8}
+.order-form{background:#fff;border-radius:10px;padding:15px;margin-top:10px}
+.order-form input,.order-form textarea,.order-form select{width:100%;padding:8px;margin-bottom:10px;border:1px solid #ddd;border-radius:6px;font-size:13px}
+.submit-btn{background:#8B4513;color:#fff;border:none;padding:10px;width:100%;border-radius:8px;font-size:15px;cursor:pointer}
+.submit-btn:active{opacity:.8}
+.section-title{font-weight:700;margin:15px 0 10px;font-size:15px}
+.empty-tip{text-align:center;color:#999;padding:20px;font-size:13px}
 </style>
 </head>
 <body>
 
-<!-- 顶部 -->
 <div class="header">
   <div class="header-top">
-    <h1>🐷 润林牧场</h1>
-    <div class="weather-bar" onclick="showCityPicker()">🌤 <span id="weatherText">定位中...</span></div>
+    <h1>🐑 润林牧场</h1>
+    <div class="weather-bar" id="weatherText" onclick="refreshWeather()">📍 定位中... 点击刷新</div>
   </div>
   <div class="search-box">
-    <span>🔍</span>
-    <input type="text" placeholder="搜索鲜肉、部位、分类..." id="searchInput" oninput="doSearch()">
+    <input type="text" id="searchInput" placeholder="搜索商品，如：羊排">
+    <button class="search-btn" onclick="doSearch()">搜索</button>
   </div>
 </div>
 
-<!-- 首页 -->
-<div class="page active" id="page-home">
+<div class="page active" id="pageHome">
   <div class="banner">
-    <h2>🥩 润林牧场 · 现宰现发</h2>
-    <p>农村散养土猪 · 无激素无抗生素 · 当天屠宰冷链配送</p>
+    <h2>🥩 农村散养 · 现宰现发</h2>
+    <p>土猪 / 土鸡 / 土鸭，地道农家味</p>
   </div>
-  <div class="cat-grid" id="catGrid"></div>
-  <div class="goods-list" id="homeGoodsList"></div>
+  <div class="section-title">📦 全部商品 <span style="float:right;font-size:12px;color:#8B4513;cursor:pointer" onclick="switchTab('cat')">分类 ›</span></div>
+  <div id="homeGoodsList"></div>
 </div>
 
-<!-- 分类页 -->
-<div class="page" id="page-cat">
-  <div class="banner" style="background:linear-gradient(135deg,#5D4037,#8D6E63)">
-    <h2>📂 全部分类</h2>
-    <p>按部位选肉 · 按需订货</p>
-  </div>
-  <div class="cat-grid" id="catGrid2"></div>
-  <div style="margin:15px 0 8px;font-size:14px;font-weight:600;color:#8B4513">🛠 工具与服务</div>
+<div class="page" id="pageCat">
+  <div class="section-title">🔥 商品分类</div>
+  <div class="cat-grid" id="catGrid"></div>
+  <div class="section-title">🛠 工具与服务</div>
   <div class="tool-grid">
-    <div class="tool-card" onclick="switchPage('page-weight')">
-      <div class="tool-icon">⚖️</div>
-      <div class="tool-label">称重换算</div>
-    </div>
-    <div class="tool-card" onclick="shareApp()">
-      <div class="tool-icon">📤</div>
-      <div class="tool-label">分享商城</div>
-    </div>
-    <div class="tool-card" onclick="switchPage('page-edu')">
-      <div class="tool-icon">📖</div>
-      <div class="tool-label">土猪科普</div>
-    </div>
-    <div class="tool-card" onclick="switchPage('page-apply')">
-      <div class="tool-icon">🏪</div>
-      <div class="tool-label">商家入驻</div>
-    </div>
-    <div class="tool-card" onclick="callPhone()">
-      <div class="tool-icon">📞</div>
-      <div class="tool-label">一键联系</div>
-    </div>
-    <div class="tool-card" onclick="switchPage('page-order')">
-      <div class="tool-icon">📋</div>
-      <div class="tool-label">我的订货</div>
-    </div>
+    <div class="tool-card" onclick="showPromo()">📢 宣传与科普</div>
+    <div class="tool-card" onclick="alert('称重换算：1斤=500克\n活猪出肉率约60-65%')">⚖️ 称重换算</div>
+    <div class="tool-card" onclick="alert('链接已复制，发给朋友吧！')">🔗 分享商城</div>
   </div>
+  <div class="section-title">📦 商品列表</div>
   <div id="catGoodsList"></div>
 </div>
 
-<!-- 科普页 -->
-<div class="page" id="page-edu">
-  <div class="edu-hero">
-    <h2>📖 为什么选润林土猪？</h2>
-    <p>吃得好，才能长得好 · 懂肉的人都知道</p>
+<div class="page" id="pageOrder">
+  <div class="section-title">📝 我要订货</div>
+  <div class="order-form">
+    <input type="text" id="orderName" placeholder="姓名 *">
+    <input type="tel" id="orderPhone" placeholder="电话 *">
+    <select id="orderProvince"><option value="">选择省份</option><option>四川省</option><option>重庆市</option><option>贵州省</option><option>云南省</option><option>广东省</option></select>
+    <select id="orderCity"><option value="">选择城市</option><option>成都市</option><option>绵阳市</option><option>南充市</option></select>
+    <input type="text" id="orderAddr" placeholder="详细地址 *">
+    <textarea id="orderGoods" placeholder="要什么肉 / 多少斤（如：土猪五花肉3斤）" rows="3"></textarea>
+    <textarea id="orderNote" placeholder="备注（可选）" rows="2"></textarea>
+    <button class="submit-btn" onclick="submitOrder()">提交订货单</button>
   </div>
-
-  <div class="compare-table">
-    <div class="table-title">🐷 土猪肉 vs 普通饲料猪 全面对比</div>
-    <table>
-      <tr>
-        <th>对比项</th>
-        <th>🌟 润林土猪</th>
-        <th>普通饲料猪</th>
-      </tr>
-      <tr>
-        <td>饲养周期</td>
-        <td class="tag-yes">10-12个月</td>
-        <td class="tag-no">4-5个月速成</td>
-      </tr>
-      <tr>
-        <td>日常饲料</td>
-        <td class="tag-yes">玉米/红薯/野菜/米糠</td>
-        <td class="tag-no">工业化配合饲料</td>
-      </tr>
-      <tr>
-        <td>运动空间</td>
-        <td class="tag-yes">山地放养 · 自由活动</td>
-        <td class="tag-no">圈养 · 极少运动</td>
-      </tr>
-      <tr>
-        <td>脂肪含量</td>
-        <td class="tag-yes">适中 · 大理石纹路</td>
-        <td class="tag-no">过瘦或过肥</td>
-      </tr>
-      <tr>
-        <td>烹饪表现</td>
-        <td class="tag-yes">久煮不柴 · 汤汁浓白</td>
-        <td class="tag-no">易柴 · 腥味重</td>
-      </tr>
-      <tr>
-        <td>安全指标</td>
-        <td class="tag-yes">无激素 · 无抗生素</td>
-        <td class="tag-no">可能残留</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="feature-card">
-    <h3>🏔 润林牧场养殖方式</h3>
-    <ul>
-      <li>📍 养殖基地位于山区，空气水质优良</li>
-      <li>🐖 传统土猪品种，非转基因</li>
-      <li>🌾 主食玉米、红薯、野菜、米糠，不喂生长素</li>
-      <li>🏃 每日山地活动，肉质紧实不松散</li>
-      <li>🩺 定期兽医巡检，健康可追溯</li>
-      <li>🔪 当天屠宰，0-4℃排酸处理，冷链直送</li>
-    </ul>
-  </div>
-
-  <div class="feature-card">
-    <h3>👅 口感差异 · 一口就知道</h3>
-    <div class="taste-grid">
-      <div class="taste-item">
-        <div class="taste-icon">🥩</div>
-        <div class="taste-label">红烧肉</div>
-        <div class="taste-desc">肥而不腻<br>入口即化</div>
-      </div>
-      <div class="taste-item">
-        <div class="taste-icon">🍲</div>
-        <div class="taste-label">炖汤</div>
-        <div class="taste-desc">汤色浓白<br>鲜甜回甘</div>
-      </div>
-      <div class="taste-item">
-        <div class="taste-icon">🥓</div>
-        <div class="taste-label">回锅肉</div>
-        <div class="taste-desc">皮糯肉弹<br>锅巴焦香</div>
-      </div>
-      <div class="taste-item">
-        <div class="taste-icon">🥟</div>
-        <div class="taste-label">饺子馅</div>
-        <div class="taste-desc">汁水丰盈<br>肉香浓郁</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="feature-card">
-    <h3>💬 客户真实反馈</h3>
-    <p style="font-style:italic;color:#666;margin-bottom:8px">"买了一次就回不去了，家里小孩说肉有肉味，汤特别甜。"</p>
-    <p style="font-style:italic;color:#666;margin-bottom:8px">"过年订了半头猪，亲戚都说比菜市场好太多，肥瘦刚好。"</p>
-    <p style="font-style:italic;color:#666">"给老人买的，牙口不好也能吃，肉嫩不塞牙。"</p>
-  </div>
-
-  <div class="edu-cta">
-    <h3>🛒 尝鲜正当时</h3>
-    <p>现宰现发 · 顺丰冷链 · 不满意包退</p>
-    <button class="btn-cta" onclick="switchPage('page-home')">去挑选鲜肉 →</button>
-  </div>
+  <div class="section-title">📜 我的订货记录</div>
+  <div id="orderHistory"></div>
 </div>
 
-<!-- 称重换算页 -->
-<div class="page" id="page-weight">
-  <div class="banner" style="background:linear-gradient(135deg,#5D4037,#8D6E63)">
-    <h2>⚖️ 活重→出肉率换算</h2>
-    <p>一头猪大约能出60%-65%的肉</p>
-  </div>
-  <div class="form-group">
-    <label>活猪重量（斤）</label>
-    <input type="number" id="liveWeight" placeholder="输入活猪总重" oninput="calcMeat()">
-  </div>
-  <div id="weightResult" style="display:none">
-    <div class="feature-card">
-      <h3>📊 出肉估算</h3>
-      <p>净肉约：<strong id="meatResult" style="color:#8B4513;font-size:18px"></strong></p>
-      <p style="font-size:12px;color:#999;margin-top:6px">* 按62%出肉率估算，实际因品种略有差异</p>
-    </div>
-  </div>
-</div>
-
-<!-- 订货页 -->
-<div class="page" id="page-order">
-  <div class="modal-title">📝 填写订货单</div>
-  <div class="form-group">
-    <label>姓名 *</label>
-    <input type="text" id="orderName" placeholder="您的姓名">
-  </div>
-  <div class="form-group">
-    <label>电话 *</label>
-    <input type="tel" id="orderPhone" placeholder="联系电话">
-  </div>
-  <div class="form-group">
-    <label>所在地区 *</label>
-    <div class="city-picker">
-      <select id="orderProvince" onchange="loadCities()"></select>
-      <select id="orderCity"></select>
-    </div>
-  </div>
-  <div class="form-group">
-    <label>详细地址 *</label>
-    <input type="text" id="orderAddr" placeholder="街道/小区/门牌号">
-  </div>
-  <div class="form-group">
-    <label>商品/需求</label>
-    <textarea id="orderGoods" placeholder="例如：土猪后腿肉5斤、排骨3斤..."></textarea>
-  </div>
-  <div class="form-group">
-    <label>备注</label>
-    <textarea id="orderNote" placeholder="配送时间偏好、特殊要求等"></textarea>
-  </div>
-  <button class="btn-primary" onclick="submitOrder()">提交订货单</button>
-</div>
-
-<!-- 商家入驻 -->
-<div class="page" id="page-apply">
-  <div class="modal-title">🏪 商家入驻申请</div>
-  <div class="form-group">
-    <label>店铺名称 *</label>
-    <input type="text" id="applyShop" placeholder="您的店名">
-  </div>
-  <div class="form-group">
-    <label>联系人 *</label>
-    <input type="text" id="applyName" placeholder="联系人姓名">
-  </div>
-  <div class="form-group">
-    <label>电话 *</label>
-    <input type="tel" id="applyPhone" placeholder="联系电话">
-  </div>
-  <div class="form-group">
-    <label>经营类型</label>
-    <select id="applyType">
-      <option value="餐馆">餐馆/饭店</option>
-      <option value="食堂">食堂/团餐</option>
-      <option value="零售">生鲜零售</option>
-      <option value="其他">其他</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>留言</label>
-    <textarea id="applyNote" placeholder="月需求量、合作意向等"></textarea>
-  </div>
-  <button class="btn-primary" onclick="submitApply()">提交申请</button>
-</div>
-
-<!-- 我的 -->
-<div class="page" id="page-me">
+<div class="page" id="pageMe">
   <div style="background:linear-gradient(135deg,#8B4513,#A0522D);border-radius:12px;padding:20px;color:#fff;text-align:center;margin-bottom:15px">
     <div style="font-size:42px;margin-bottom:8px">👤</div>
     <div style="font-size:16px;font-weight:600">润林牧场客户</div>
-    <div style="font-size:12px;opacity:.8;margin-top:4px">密码 668899</div>
+    <div style="font-size:12px;opacity:.8;margin-top:4px">管理密码 668899</div>
   </div>
-  <div class="tool-grid" style="grid-template-columns:1fr 1fr">
-    <div class="tool-card" onclick="showMessages()">
-      <div class="tool-icon">💬</div>
-      <div class="tool-label">客户留言</div>
-    </div>
-    <div class="tool-card" onclick="showOrders()">
-      <div class="tool-icon">📦</div>
-      <div class="tool-label">订货记录</div>
-    </div>
-    <div class="tool-card" onclick="switchPage('page-edu')">
-      <div class="tool-icon">📖</div>
-      <div class="tool-label">土猪科普</div>
-    </div>
-    <div class="tool-card" onclick="clearData()">
-      <div class="tool-icon">🗑</div>
-      <div class="tool-label">清除数据</div>
-    </div>
+  <div class="tool-grid">
+    <div class="tool-card" onclick="switchTab('order')">📦 订货记录</div>
+    <div class="tool-card" onclick="showPromo()">📖 品质科普</div>
+    <div class="tool-card" onclick="callPhone()">📞 联系商家</div>
+    <div class="tool-card" onclick="alert('微信号: runlin123\n（点击复制）')">💬 微信客服</div>
+    <div class="tool-card" onclick="alert('功能开发中，敬请期待')">⚙️ 设置</div>
+    <div class="tool-card" onclick="clearData()">🗑 清除数据</div>
   </div>
-  <div id="meContent"></div>
 </div>
 
-<!-- 底部导航 -->
+<div class="promo-modal" id="promoModal">
+  <div class="promo-content">
+    <div class="promo-tabs">
+      <button class="promo-tab active" onclick="switchPromo('pig',this)">🐷 土猪</button>
+      <button class="promo-tab" onclick="switchPromo('chicken',this)">🐔 土鸡</button>
+      <button class="promo-tab" onclick="switchPromo('duck',this)">🦆 土鸭</button>
+    </div>
+    <div id="promoContent"></div>
+    <button class="submit-btn" onclick="closePromo()" style="margin-top:15px;background:#999">关闭</button>
+  </div>
+</div>
+
 <div class="bottom-nav">
-  <div class="nav-item active" onclick="switchPage('page-home')">
-    <div class="nav-icon">🏠</div>
-    <div>首页</div>
-  </div>
-  <div class="nav-item" onclick="switchPage('page-cat')">
-    <div class="nav-icon">📂</div>
-    <div>分类</div>
-  </div>
-  <div class="nav-item" onclick="switchPage('page-order')">
-    <div class="nav-icon">📝</div>
-    <div>订货</div>
-  </div>
-  <div class="nav-item" onclick="switchPage('page-me')">
-    <div class="nav-icon">👤</div>
-    <div>我的</div>
-  </div>
-</div>
-
-<!-- 城市选择弹窗 -->
-<div class="modal-overlay" id="cityModal">
-  <div class="modal-content">
-    <div class="modal-title">选择城市</div>
-    <div class="city-picker">
-      <select id="modalProvince" onchange="modalLoadCities()"></select>
-      <select id="modalCity"></select>
-    </div>
-    <button class="btn-primary" onclick="confirmCity()" style="margin-top:15px">确认</button>
-    <button class="btn-secondary" onclick="closeCityPicker()">取消</button>
-  </div>
+  <div class="nav-item active" data-page="home" onclick="switchTab('home')"><div class="nav-icon">🏠</div>首页</div>
+  <div class="nav-item" data-page="cat" onclick="switchTab('cat')"><div class="nav-icon">🔍</div>分类</div>
+  <div class="nav-item" data-page="order" onclick="switchTab('order')"><div class="nav-icon">📦</div>订单</div>
+  <div class="nav-item" data-page="me" onclick="switchTab('me')"><div class="nav-icon">👤</div>我的</div>
 </div>
 
 <script>
-// ===== 数据 =====
-const categories = [
-  {id:'all',name:'全部',icon:'🐷'},
-  {id:'tibei',name:'蹄髈',icon:'🍖'},
-  {id:'pai',name:'排骨',icon:'🍖'},
-  {id:'tui',name:'后腿',icon:'🥩'},
-  {id:'wu',name:'五花',icon:'🥓'},
-  {id:'li',name:'里脊',icon:'🥩'},
-  {id:'zhu',name:'猪杂',icon:'🫁'},
-  {id:'tu',name:'土猪',icon:'🌟'},
+var goods = [
+  {name:"土猪五花肉",desc:"农村散养·肥瘦相间·红烧首选",price:38,icon:"🥩",cat:"猪"},
+  {name:"土猪前腿肉",desc:"肉质紧实·适合红烧/炒肉丝",price:35,icon:"🥩",cat:"猪"},
+  {name:"土猪排骨",desc:"新鲜现宰·骨髓饱满·煲汤佳品",price:42,icon:"🍖",cat:"猪"},
+  {name:"土猪后腿肉",desc:"精瘦为主·适合炒/卤/做馅",price:32,icon:"🥩",cat:"猪"},
+  {name:"散养土鸡",desc:"山林放养·汤鲜肉紧·满山跑",price:68,icon:"🐔",cat:"鸡"},
+  {name:"土鸡蛋 30枚",desc:"五谷喂养·蛋黄金黄·无激素",price:28,icon:"🥚",cat:"鸡"},
+  {name:"散养土鸭",desc:"稻田放养·吃鱼虾水草·肉质鲜美",price:58,icon:"🦆",cat:"鸭"},
+  {name:"鲜羊排",desc:"鲜嫩无膻·炭烤/红烧皆宜",price:65,icon:"🐑",cat:"羊"},
+  {name:"羊腿肉",desc:"精瘦为主·炖煮/爆炒",price:55,icon:"🐑",cat:"羊"}
 ];
 
-const goods = [
-  {id:1,name:'土猪前蹄髈',cat:'tibei',price:38,unit:'斤',desc:'带皮前蹄髈，胶质丰富，红烧首选',icon:'🍖'},
-  {id:2,name:'土猪后蹄髈',cat:'tibei',price:35,unit:'斤',desc:'后蹄髈瘦肉多，适合卤制',icon:'🍖'},
-  {id:3,name:'精品肋排',cat:'pai',price:45,unit:'斤',desc:'精选中段肋排，肉厚骨细',icon:'🍖'},
-  {id:4,name:'前排',cat:'pai',price:32,unit:'斤',desc:'前排软骨多，煲汤佳品',icon:'🍖'},
-  {id:5,name:'土猪后腿肉',cat:'tui',price:28,unit:'斤',desc:'后腿精肉，适合炒肉丝/肉片',icon:'🥩'},
-  {id:6,name:'后腿半肥半瘦',cat:'tui',price:26,unit:'斤',desc:'肥瘦相间，做馅/丸子最佳',icon:'🥩'},
-  {id:7,name:'精品五花肉',cat:'wu',price:35,unit:'斤',desc:'三层分明，红烧肉绝配',icon:'🥓'},
-  {id:8,name:'精品五花肉',cat:'wu',price:35,unit:'斤',desc:'肥瘦均匀，回锅肉首选',icon:'🥓'},
-  {id:9,name:'里脊肉',cat:'li',price:32,unit:'斤',desc:'全瘦嫩肉，糖醋里脊/滑肉',icon:'🥩'},
-  {id:10,name:'猪肝',cat:'zhu',price:12,unit:'斤',desc:'新鲜猪肝，补血佳品',icon:'🫁'},
-  {id:11,name:'猪肚',cat:'zhu',price:38,unit:'斤',desc:'清洗干净，煲汤/爆炒',icon:'🫁'},
-  {id:12,name:'整头土猪预订',cat:'tu',price:25,unit:'斤',desc:'整猪预订，按活重计价，屠宰后配送',icon:'🌟'},
-];
+var promoData = {
+  pig: {
+    title: "🐷 润林土猪",
+    desc: "农村传统饲养，周期12个月以上，吃玉米/红薯/野菜，肉质紧实、肥而不腻。",
+    table: [["对比项","润林土猪","普通饲料猪"],["饲养周期","12个月+","4-5个月"],["喂养方式","五谷+野菜","全价饲料"],["运动量","山地散养","圈养不动"],["口感","香嫩有嚼劲","松散腥味重"],["肥肉","晶莹不腻","油腻腻口"]]
+  },
+  chicken: {
+    title: "🐔 润林土鸡",
+    desc: "山林散养，满山跑，吃虫吃谷，炖汤金黄鲜美，肉紧皮脆。",
+    table: [["对比项","润林土鸡","速成肉鸡"],["饲养周期","8个月+","40天"],["活动量","大（山林）","极小（笼养）"],["食物","虫+谷+草","全价饲料"],["汤色","金黄浓郁","清淡寡水"],["肉质","紧实有弹性","松散发柴"]]
+  },
+  duck: {
+    title: "🦆 润林土鸭",
+    desc: "稻田放养，吃鱼虾水草，肉质紧实，炖汤鲜甜，烧鸭更香。",
+    table: [["对比项","润林土鸭","圈养肉鸭"],["饲养周期","6个月+","40天"],["环境","稻田/水塘","密集棚养"],["食物","鱼虾+水草+稻谷","全价饲料"],["油脂","少而香","多而腻"],["口感","紧实鲜甜","偏肥腥"]]
+  }
+};
 
-const provinces = [
-  {name:'四川省',cities:['成都市','绵阳市','德阳市','宜宾市','南充市','达州市','乐山市']},
-  {name:'重庆市',cities:['渝中区','江北区','沙坪坝区','九龙坡区','南岸区']},
-  {name:'贵州省',cities:['贵阳市','遵义市','六盘水市','安顺市']},
-  {name:'云南省',cities:['昆明市','曲靖市','玉溪市','大理市']},
-  {name:'广东省',cities:['广州市','深圳市','东莞市','佛山市','中山市']},
-  {name:'浙江省',cities:['杭州市','宁波市','温州市','绍兴市']},
-  {name:'北京市',cities:['朝阳区','海淀区','丰台区','西城区']},
-  {name:'上海市',cities:['黄浦区','徐汇区','长宁区','静安区']},
-];
+var curCat = "全部";
 
-// ===== 页面切换 =====
-function switchPage(pageId){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const navMap={'page-home':0,'page-cat':1,'page-order':2,'page-me':3};
-  if(navMap[pageId]!==undefined) document.querySelectorAll('.nav-item')[navMap[pageId]].classList.add('active');
-  if(pageId==='page-cat'){renderCatGrid2();renderCatGoods('all')}
-  if(pageId==='page-me') showOrders();
+function switchTab(tab) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('page' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+  document.querySelector('.nav-item[data-page="' + tab + '"]').classList.add('active');
+  if (tab === 'cat') { renderCatGrid(); renderCatGoods('全部'); }
+  if (tab === 'order') showOrderHistory();
+  if (tab === 'home') renderGoodsList(goods, 'homeGoodsList');
 }
 
-// ===== 分类渲染 =====
-function renderCatGrid(){
-  const grid=document.getElementById('catGrid');
-  grid.innerHTML=categories.map(c=>`<div class="cat-item ${c.id==='all'?'active':''}" onclick="filterByCat('${c.id}')"><div class="cat-icon">${c.icon}</div><div>${c.name}</div></div>`).join('');
+function renderCatGrid() {
+  var cats = ["全部","猪","鸡","鸭","羊"];
+  var html = '';
+  for (var i = 0; i < cats.length; i++) {
+    html += '<div class="cat-item ' + (cats[i] === curCat ? 'active' : '') + '" onclick="filterCat(\'' + cats[i] + '\')"><div style="font-size:20px;margin-bottom:4px">' + (cats[i]==='全部'?'🍽️':cats[i]==='猪'?'🐷':cats[i]==='鸡'?'🐔':cats[i]==='鸭'?'🦆':'🐑') + '</div>' + cats[i] + '</div>';
+  }
+  document.getElementById('catGrid').innerHTML = html;
 }
-function renderCatGrid2(){
-  const grid=document.getElementById('catGrid2');
-  grid.innerHTML=categories.map(c=>`<div class="cat-item" onclick="renderCatGoods('${c.id}')"><div class="cat-icon">${c.icon}</div><div>${c.name}</div></div>`).join('');
+
+function filterCat(c) {
+  curCat = c;
+  renderCatGrid();
+  if (c === '全部') renderCatGoods('全部');
+  else renderCatGoods(c);
 }
-function filterByCat(catId){
-  document.querySelectorAll('#catGrid .cat-item').forEach((c,i)=>c.classList.toggle('active',categories[i].id===catId));
-  renderGoodsList(catId==='all'?goods:goods.filter(g=>g.cat===catId),'homeGoodsList');
+
+function renderCatGoods(cat) {
+  var list = cat === '全部' ? goods : goods.filter(function(g) { return g.cat === cat; });
+  renderGoodsList(list, 'catGoodsList');
 }
-function renderCatGoods(catId){
-  document.querySelectorAll('#catGrid2 .cat-item').forEach(c=>c.classList.remove('active'));
-  event.target.closest('.cat-item').classList.add('active');
-  renderGoodsList(catId==='all'?goods:goods.filter(g=>g.cat===catId),'catGoodsList');
+
+function renderGoodsList(list, id) {
+  if (!list.length) {
+    document.getElementById(id).innerHTML = '<div class="empty-tip">暂无商品</div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var g = list[i];
+    html += '<div class="goods-card"><div class="goods-img">' + g.icon + '</div><div class="goods-info"><div class="goods-name">' + g.name + '</div><div class="goods-desc">' + g.desc + '</div><div class="goods-price">¥' + g.price + '/斤</div></div></div>';
+  }
+  document.getElementById(id).innerHTML = html;
 }
-function renderGoodsList(list,containerId){
-  const container=document.getElementById(containerId);
-  if(!list.length){container.innerHTML='<div class="empty-tip"><div class="empty-icon">📦</div>暂无商品</div>';return}
-  container.innerHTML=list.map(g=>`
-    <div class="goods-card" onclick="orderGoods(' 
+
+function doSearch() {
+  var kw = document.getElementById('searchInput').value.trim();
+  if (!kw) { renderGoodsList(goods, 'homeGoodsList'); return; }
+  var result = goods.filter(function(g) { return g.name.indexOf(kw) !== -1 || g.desc.indexOf(kw) !== -1; });
+  renderGoodsList(result, 'homeGoodsList');
+}
+
+function showPromo() {
+  document.getElementById('promoModal').classList.add('active');
+  switchPromo('pig', document.querySelector('.promo-tab'));
+}
+
+function closePromo() {
+  document.getElementById('promoModal').classList.remove('active');
+}
+
+function switchPromo(type, el) {
+  document.querySelectorAll('.promo-tab').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+  var d = promoData[type];
+  var tableHtml = '<table class="compare-table"><tr>';
+  for (var i = 0; i < d.table[0].length; i++) tableHtml += '<th>' + d.table[0][i] + '</th>';
+  tableHtml += '</tr>';
+  for (var r = 1; r < d.table.length; r++) {
+    tableHtml += '<tr>';
+    for (var c = 0; c < d.table[r].length; c++) tableHtml += '<td>' + d.table[r][c] + '</td>';
+    tableHtml += '</tr>';
+  }
+  tableHtml += '</table>';
+  document.getElementById('promoContent').innerHTML = '<h3 style="color:#8B4513;margin-bottom:8px">' + d.title + '</h3><p style="margin-bottom:10px;color:#555;line-height:1.6">' + d.desc + '</p>' + tableHtml + '<p style="margin-top:10px;color:#d2691e;font-weight:700">👉 认准润林牧场，地道农家味！</p>';
+}
+
+function submitOrder() {
+  var name = document.getElementById('orderName').value.trim();
+  var phone = document.getElementById('orderPhone').value.trim();
+  var addr = document.getElementById('orderAddr').value.trim();
+  var goodsText = document.getElementById('orderGoods').value.trim();
+  if (!name || !phone || !addr) { alert('请填写姓名、电话和地址（标*的）'); return; }
+  var order = {name:name, phone:phone, addr:addr, goods:goodsText, note:document.getElementById('orderNote').value.trim(), time:new Date().toLocaleString()};
+  var orders = JSON.parse(localStorage.getItem('orders') || '[]');
+  orders.unshift(order);
+  localStorage.setItem('orders', JSON.stringify(orders));
+  alert('✅ 订货单提交成功！我们会尽快联系您。');
+  document.getElementById('orderName').value = '';
+  document.getElementById('orderPhone').value = '';
+  document.getElementById('orderAddr').value = '';
+  document.getElementById('orderGoods').value = '';
+  document.getElementById('orderNote').value = '';
+  showOrderHistory();
+}
+
+function showOrderHistory() {
+  var orders = JSON.parse(localStorage.getItem('orders') || '[]');
+  var container = document.getElementById('orderHistory');
+  if (!orders.length) { container.innerHTML = '<div class="empty-tip">暂无订货记录</div>'; return; }
+  var html = '';
+  for (var i = 0; i < orders.length; i++) {
+    var o = orders[i];
+    html += '<div style="background:#fff;padding:10px;border-radius:8px;margin-bottom:8px;font-size:12px"><b>' + o.name + '</b> ' + o.phone + '<br>' + o.addr + '<br><span style="color:#d2691e">' + (o.goods || '未指定商品') + '</span>' + (o.note ? '<br>📝 ' + o.note : '') + '<br><small style="color:#999">' + o.time + '</small></div>';
+  }
+  container.innerHTML = html;
+}
+
+function callPhone() {
+  window.location.href = 'tel:18011452292';
+}
+
+function clearData() {
+  if (!confirm('确定清除所有本地数据？此操作不可恢复！')) return;
+  localStorage.removeItem('orders');
+  alert('已清除');
+  document.getElementById('orderHistory').innerHTML = '<div class="empty-tip">暂无订货记录</div>';
+}
+
+function refreshWeather() {
+  document.getElementById('weatherText').innerText = '📍 定位中... 点击刷新';
+  autoLocate();
+}
+
+function autoLocate() {
+  var done = false;
+  setTimeout(function() {
+    if (!done) { done = true; document.getElementById('weatherText').innerText = '📍 成都 🌤 22°C'; }
+  }, 2000);
+  if (!navigator.geolocation) { done = true; document.getElementById('weatherText').innerText = '📍 成都 🌤 22°C'; return; }
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    if (done) return; done = true;
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + pos.coords.latitude + '&longitude=' + pos.coords.longitude + '&current=temperature_2m&timezone=Asia/Shanghai')
+      .then(function(r) { return r.json(); })
+      .then(function(d) { document.getElementById('weatherText').innerText = '📍 当前 ' + Math.round(d.current.temperature_2m) + '°C'; })
+      .catch(function() { document.getElementById('weatherText').innerText = '📍 成都 🌤 22°C'; });
+  }, function() {
+    if (!done) { done = true; document.getElementById('weatherText').innerText = '📍 成都 🌤 22°C'; }
+  }, {timeout: 1500});
+}
+
+// 初始化
+renderGoodsList(goods, 'homeGoodsList');
+autoLocate();
+</script>
+</body>
+</html>
