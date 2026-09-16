@@ -3,307 +3,324 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>润林牧场</title>
+<title>润林牧场 - 综合商城</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f5f5f5; color: #333; font-size: 16px; padding-bottom: 60px; position: relative; }
-.header { background: #8bc34a; color: #fff; padding: 15px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
-.search-box { display: flex; gap: 8px; margin-top: 10px; }
-.search-box input { flex: 1; padding: 8px 12px; border: none; border-radius: 20px; outline: none; font-size: 14px; }
-.search-box button { background: #fff; color: #8bc34a; border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; }
-.wechat-pay { background: #07c160; color: #fff; text-align: center; padding: 10px; margin: 10px; border-radius: 8px; font-size: 15px; cursor: pointer; }
-.quick-entry { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; background: #fff; margin: 10px; border-radius: 8px; }
-.quick-item { text-align: center; cursor: pointer; }
-.quick-item div:first-child { font-size: 28px; margin-bottom: 5px; }
-.quick-item div:last-child { font-size: 13px; color: #666; }
-.stats-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; margin: 10px; background: #fff; border-radius: 8px; }
-.stat-card { padding: 10px; background: #f9f9f9; border-radius: 6px; text-align: center; }
-.stat-num { font-size: 22px; font-weight: bold; color: #8bc34a; }
-.stat-label { font-size: 12px; color: #999; margin-top: 4px; }
-.section-title { padding: 15px 15px 10px; font-size: 17px; font-weight: bold; }
-.goods-list { padding: 0 10px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.goods-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-.goods-img { height: 120px; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #999; }
-.goods-info { padding: 10px; }
-.goods-name { font-size: 15px; font-weight: bold; margin-bottom: 5px; }
-.goods-price { color: #f44336; font-size: 16px; font-weight: bold; }
-.goods-btn { width: 100%; margin-top: 8px; padding: 6px; background: #8bc34a; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
-.cart-icon { position: fixed; right: 15px; bottom: 75px; width: 50px; height: 50px; background: #ff5722; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; box-shadow: 0 3px 8px rgba(0,0,0,.2); cursor: pointer; z-index: 99; }
-#cartBadge { position: absolute; top: -5px; right: -5px; background: #f44336; color: #fff; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: none; align-items: center; justify-content: center; }
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #eee; z-index: 100; }
-.nav-item { padding: 10px 0; text-align: center; font-size: 12px; color: #666; cursor: pointer; }
-.nav-item.active { color: #8bc34a; }
-.nav-icon { font-size: 22px; margin-bottom: 3px; }
-.modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
-.modal.active { display: flex; }
-.modal-content { background: #fff; border-radius: 10px; width: 100%; max-width: 400px; max-height: 80vh; overflow-y: auto; padding: 20px; }
-.modal-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; text-align: center; }
-.btn-primary { width: 100%; padding: 10px; background: #8bc34a; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 10px; }
-.btn-secondary { width: 100%; padding: 10px; background: #eee; color: #666; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 8px; }
-input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 14px; }
-.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
-.setting-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
-.setting-row label { flex: 1; }
-.setting-row input[type=range] { flex: 1; }
-#brightnessMask { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
-#toast { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,.8); color: #fff; padding: 12px 20px; border-radius: 6px; z-index: 999; font-size: 14px; }
-.terms-html h4 { margin: 15px 0 8px; color: #8bc34a; }
-.terms-html p { margin-bottom: 10px; line-height: 1.6; font-size: 14px; color: #555; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: rgba(0,0,0,0); }
+  body, div, span, a, li, button, input { cursor: pointer; touch-action: manipulation; font-family: "PingFang SC", sans-serif; }
+  body { background: #f5f5f5; padding-bottom: 60px; color: #333; }
+  
+  /* 顶部 */
+  .top-bar { background: #8B4513; color: #fff; padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .top-left { display: flex; align-items: center; }
+  .avatar { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #8B4513; font-weight: bold; margin-right: 10px; overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; }
+  .title-area h1 { font-size: 20px; display: flex; align-items: center; }
+  .title-area h1 span.verified { color: #2ecc71; margin-left: 5px; font-size: 16px; }
+  .title-area p { font-size: 12px; opacity: 0.8; }
+  .top-right { display: flex; gap: 10px; align-items: center; }
+  .btn-login { background: #e74c3c; color: #fff; border: none; padding: 6px 12px; border-radius: 15px; font-size: 13px; }
+  .icon-cart, .icon-share { font-size: 22px; position: relative; }
+  .badge { position: absolute; top: -5px; right: -8px; background: #e74c3c; color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 10px; }
+  
+  /* 搜索 */
+  .search-wrap { background: #8B4513; padding: 10px 15px 15px; }
+  .search-box { display: flex; background: #fff; border-radius: 20px; padding: 5px 15px; align-items: center; }
+  .search-box input { border: none; outline: none; flex: 1; font-size: 14px; padding: 5px; }
+  .search-btn { background: #e67e22; color: #fff; border: none; padding: 5px 15px; border-radius: 15px; font-size: 13px; }
+  
+  /* 微信收款 */
+  .wechat-bar { background: #fdf5e6; margin: 10px 15px; border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #f5d0a9; }
+  .wechat-left { display: flex; align-items: center; font-weight: bold; color: #8B4513; }
+  .wechat-left span { font-size: 24px; margin-right: 8px; }
+  .wechat-right { color: #2ecc71; font-size: 20px; }
+  
+  /* 导航宫格 */
+  .nav-grid { display: flex; justify-content: space-around; padding: 15px; background: #fff; margin: 10px; border-radius: 8px; }
+  .nav-item { text-align: center; flex: 1; }
+  .nav-icon { width: 50px; height: 50px; margin: 0 auto 5px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+  .bg-green { background: #e8f5e9; color: #2ecc71; }
+  .bg-yellow { background: #fff8e1; color: #f39c12; }
+  .bg-blue { background: #e3f2fd; color: #3498db; }
+  .bg-purple { background: #f3e5f5; color: #9b59b6; }
+  .nav-text { font-size: 13px; }
+  
+  /* 统计 */
+  .stats { background: #fff; margin: 10px; border-radius: 8px; padding: 15px; }
+  .section-title { font-weight: bold; margin-bottom: 10px; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .stats-row { display: flex; gap: 10px; }
+  .stat-card { flex: 1; background: #fafafa; padding: 10px; border-radius: 5px; text-align: center; }
+  .stat-num { font-size: 20px; font-weight: bold; color: #e67e22; }
+  .stat-label { font-size: 12px; color: #666; margin-top: 3px; }
+  
+  /* 商家入驻 & 分享 */
+  .merchant { background: #fff; margin: 10px; border-radius: 8px; padding: 15px; }
+  .merchant-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .btn-join { background: #8B4513; color: #fff; border: none; padding: 5px 12px; border-radius: 5px; font-size: 13px; }
+  .share-card { display: flex; align-items: center; background: #fdf5e6; padding: 10px; border-radius: 8px; margin-top: 10px; }
+  .qrcode-placeholder { width: 80px; height: 80px; background: #fff; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666; margin-right: 15px; overflow: hidden; }
+  .share-text h4 { font-size: 14px; margin-bottom: 5px; }
+  .share-text p { font-size: 12px; color: #666; }
+  
+  /* 热销 */
+  .hot-goods { margin: 10px; }
+  .goods-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; }
+  .goods-card { min-width: 140px; background: #fff; border-radius: 8px; padding: 10px; }
+  .goods-img { width: 100%; height: 100px; background: #eee; border-radius: 5px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+  .goods-name { font-size: 14px; font-weight: bold; }
+  .goods-price { color: #e74c3c; font-weight: bold; margin-top: 5px; }
+  .goods-add { float: right; background: #e67e22; color: #fff; border: none; width: 24px; height: 24px; border-radius: 50%; }
+  
+  /* 底部 */
+  footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; z-index: 99; }
+  .foot-item { flex: 1; text-align: center; padding: 8px 0; font-size: 12px; color: #666; }
+  .foot-item.active { color: #8B4513; }
+  .foot-icon { font-size: 20px; margin-bottom: 2px; }
+  
+  /* 弹窗 */
+  .modal-mask { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; }
+  .modal { background: #fff; width: 85%; border-radius: 10px; padding: 20px; position: relative; }
+  .modal-close { position: absolute; top: 10px; right: 15px; font-size: 24px; color: #999; }
+  .modal-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; text-align: center; }
+  .form-input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; font-size: 14px; }
+  .verify-row { display: flex; gap: 10px; }
+  .verify-row input { flex: 1; }
+  .btn-verify { background: #f39c12; color: #fff; border: none; padding: 10px; border-radius: 5px; font-size: 12px; white-space: nowrap; }
+  .modal-btns { display: flex; gap: 10px; margin-top: 15px; }
+  .btn-green { flex: 1; background: #2ecc71; color: #fff; border: none; padding: 12px; border-radius: 5px; font-size: 16px; }
+  .btn-orange { flex: 1; background: #e67e22; color: #fff; border: none; padding: 12px; border-radius: 5px; font-size: 16px; }
+  
+  /* 分享面板 */
+  .share-panel { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; z-index: 300; padding: 20px; border-radius: 15px 15px 0 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+  .share-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+  .share-item { text-align: center; font-size: 13px; }
+  .share-icon { width: 50px; height: 50px; margin: 0 auto 5px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+  .bg-wechat { background: #e7f7e6; color: #07c160; }
+  .bg-link { background: #e3f2fd; color: #3498db; }
+  .bg-qr { background: #fff8e1; color: #f39c12; }
+  
+  .cart-list { max-height: 200px; overflow-y: auto; margin-bottom: 10px; }
+  .cart-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; }
+  .cart-total { text-align: right; font-weight: bold; color: #e74c3c; margin-top: 10px; }
 </style>
 </head>
 <body>
 
-<div id="brightnessMask"></div>
+<!-- 顶部 -->
+<div class="top-bar">
+  <div class="top-left">
+    <div class="avatar">润</div>
+    <div class="title-area">
+      <h1>润林牧场 <span class="verified">✓</span> <span style="font-size:12px;color:#f39c12;margin-left:5px;">定位</span></h1>
+      <p>北京市 · 新鲜直达</p>
+    </div>
+  </div>
+  <div class="top-right">
+    <button class="btn-login" onclick="showLogin()">登录/注册</button>
+    <div class="icon-share" onclick="showShare()">📤</div>
+    <div class="icon-cart" onclick="showCart()">🛒<span class="badge" id="cartBadge">0</span></div>
+  </div>
+</div>
 
-<div class="header">
-  <div style="font-size:20px;font-weight:bold;">润林牧场</div>
-  <div style="font-size:12px;opacity:.9;">新鲜 · 健康 · 直达</div>
+<!-- 搜索 -->
+<div class="search-wrap">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="搜索商品（羊肉/代养/饲料）">
-    <button onclick="doSearch()">搜索</button>
-  </div>
-</div>
-
-<div class="wechat-pay" onclick="showWechatPay()">💚 微信收款 / 扫码支付</div>
-
-<div class="quick-entry">
-  <div class="quick-item" onclick="filterGoods('meat')"><div>🥩</div><div>买肉</div></div>
-  <div class="quick-item" onclick="filterGoods('raise')"><div>🐑</div><div>代养</div></div>
-  <div class="quick-item" onclick="showOrders()"><div>📦</div><div>订单</div></div>
-  <div class="quick-item" onclick="showOrders()"><div>📋</div><div>项单</div></div>
-</div>
-
-<div class="stats-panel">
-  <div class="stat-card"><div class="stat-num" id="todayOrders">12</div><div class="stat-label">今日订单</div></div>
-  <div class="stat-card"><div class="stat-num" id="monthOrders">386</div><div class="stat-label">本月订单</div></div>
-  <div class="stat-card"><div class="stat-num" id="totalUsers">1256</div><div class="stat-label">注册用户</div></div>
-  <div class="stat-card"><div class="stat-num" id="totalGoods">68</div><div class="stat-label">在售商品</div></div>
-</div>
-
-<div class="section-title">🔥 热销商品</div>
-<div class="goods-list" id="goodsList"></div>
-
-<div class="cart-icon" onclick="showCart()">🛒<span id="cartBadge">0</span></div>
-
-<div class="bottom-nav">
-  <div class="nav-item active" onclick="switchTab('home')"><div class="nav-icon">🏠</div><div>首页</div></div>
-  <div class="nav-item" onclick="switchTab('category')"><div class="nav-icon">📂</div><div>分类</div></div>
-  <div class="nav-item" onclick="switchTab('cart')"><div class="nav-icon">🛒</div><div>购物车</div></div>
-  <div class="nav-item" onclick="showSettings()"><div class="nav-icon">⚙️</div><div>我的</div></div>
-</div>
-
-<!-- 登录/注册 -->
-<div class="modal" id="loginModal">
-  <div class="modal-content">
-    <div class="modal-title" id="loginTitle">手机号登录</div>
-    <input type="tel" id="phone" placeholder="请输入手机号" maxlength="11">
-    <input type="password" id="pwd" placeholder="请输入密码" id="loginPwd">
-    <input type="text" id="code" placeholder="验证码（注册必填）" style="display:none;">
-    <div style="text-align:right;font-size:13px;color:#8bc34a;cursor:pointer;margin-bottom:10px;" onclick="toggleLoginReg()">没有账号？注册</div>
-    <button class="btn-primary" onclick="doLogin()">登录</button>
-    <button class="btn-secondary" onclick="hideModal('loginModal')">取消</button>
-  </div>
-</div>
-
-<!-- 购物车 -->
-<div class="modal" id="cartModal">
-  <div class="modal-content">
-    <div class="modal-title">购物车</div>
-    <div id="cartList"></div>
-    <div id="emptyCart" style="text-align:center;padding:20px;color:#999;">购物车空空如也</div>
-    <div style="margin-top:15px;padding-top:15px;border-top:1px solid #eee;font-weight:bold;" id="cartTotal">合计：￥0</div>
-    <button class="btn-primary" onclick="checkout()">结算</button>
-    <button class="btn-secondary" onclick="hideModal('cartModal')">关闭</button>
-  </div>
-</div>
-
-<!-- 设置 -->
-<div class="modal" id="settingsModal">
-  <div class="modal-content">
-    <div class="modal-title">设置</div>
-    <div class="setting-row">
-      <label>字体大小</label>
-      <input type="range" id="fontSlider" min="1" max="3" value="2" onchange="changeFont(this.value)">
-      <span id="fontLabel">标准</span>
-    </div>
-    <div class="setting-row">
-      <label>屏幕亮度</label>
-      <input type="range" id="brightSlider" min="30" max="100" value="100" onchange="changeBrightness(this.value)">
-      <span id="brightLabel">100%</span>
-    </div>
-    <div class="setting-row"><label>当前账号</label><span id="curUser">未登录</span></div>
-    <button class="btn-primary" onclick="showPwdModal()">修改密码</button>
-    <button class="btn-primary" onclick="showTerms('service')">用户服务协议</button>
-    <button class="btn-primary" onclick="showTerms('privacy')">隐私政策</button>
-    <button class="btn-secondary" onclick="doLogout()">退出登录</button>
-    <button class="btn-secondary" onclick="hideModal('settingsModal')">关闭</button>
-  </div>
-</div>
-
-<!-- 改密 -->
-<div class="modal" id="pwdModal">
-  <div class="modal-content">
-    <div class="modal-title">修改密码</div>
-    <input type="password" id="oldPwd" placeholder="原密码">
-    <input type="password" id="newPwd" placeholder="新密码（至少6位）">
-    <input type="password" id="newPwd2" placeholder="确认新密码">
-    <button class="btn-primary" onclick="changePwd()">提交修改</button>
-    <button class="btn-secondary" onclick="hideModal('pwdModal')">取消</button>
-  </div>
-</div>
-
-<!-- 条款 -->
-<div class="modal" id="termsModal">
-  <div class="modal-content">
-    <div class="modal-title" id="termsTitle">条款</div>
-    <div class="terms-html" id="termsContent"></div>
-    <button class="btn-primary" onclick="hideModal('termsModal')">我已阅读</button>
+    <span style="color:#999;margin-right:5px;">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜索：index.com">
+    <button class="search-btn" onclick="doSearch()">搜索</button>
   </div>
 </div>
 
 <!-- 微信收款 -->
-<div class="modal" id="wechatModal">
-  <div class="modal-content">
-    <div class="modal-title">微信收款</div>
-    <div style="text-align:center;padding:20px;">
-      <div style="font-size:60px;">💚</div>
-      <div>请使用微信扫描收款码</div>
-      <div style="color:#999;font-size:13px;margin-top:10px;">（演示版，实际需上传二维码图片）</div>
-    </div>
-    <button class="btn-secondary" onclick="hideModal('wechatModal')">关闭</button>
+<div class="wechat-bar">
+  <div class="wechat-left"><span>💚</span> 微信收款</div>
+  <div class="wechat-right">✓</div>
+</div>
+
+<!-- 导航 -->
+<div class="nav-grid">
+  <div class="nav-item" onclick="switchTab('buy')"><div class="nav-icon bg-green">🛒</div><div class="nav-text">买肉</div></div>
+  <div class="nav-item" onclick="switchTab('raise')"><div class="nav-icon bg-yellow">🌼</div><div class="nav-text">代养</div></div>
+  <div class="nav-item" onclick="showOrders()"><div class="nav-icon bg-blue">📦</div><div class="nav-text">订单</div></div>
+  <div class="nav-item" onclick="switchTab('list')"><div class="nav-icon bg-purple">📋</div><div class="nav-text">项单</div></div>
+</div>
+
+<!-- 统计 -->
+<div class="stats">
+  <div class="section-title"><span>订单统计</span></div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">今日订单</div></div>
+    <div class="stat-card"><div class="stat-num">356</div><div class="stat-label">本月订单</div></div>
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">待付款</div></div>
+    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">待发货</div></div>
+    <div class="stat-card"><div class="stat-num">345</div><div class="stat-label">已完成</div></div>
   </div>
 </div>
 
-<div id="toast"></div>
+<!-- 商家入驻 & 分享APP -->
+<div class="merchant">
+  <div class="merchant-head">
+    <div class="section-title" style="margin:0;">商家入驻</div>
+    <button class="btn-join" onclick="alert('入驻申请（模拟）')">立即入驻</button>
+  </div>
+  <div class="share-card">
+    <div class="qrcode-placeholder" id="miniQr">QR</div>
+    <div class="share-text">
+      <h4>扫码分享APP</h4>
+      <p>立即下载 · 分享好友得优惠</p>
+      <div style="margin-top:8px;">
+        <button onclick="showShare()" style="background:#2ecc71;color:#fff;border:none;padding:5px 10px;border-radius:3px;font-size:12px;margin-right:5px;">分享</button>
+        <button onclick="genQrCode('miniQr')" style="background:#f39c12;color:#fff;border:none;padding:5px 10px;border-radius:3px;font-size:12px;">生成二维码</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 热销 -->
+<div class="hot-goods">
+  <div class="section-title" style="padding:0 10px;">热销推荐</div>
+  <div class="goods-scroll">
+    <div class="goods-card" onclick="addToCart('整花鸡', 128)">
+      <div class="goods-img">🍗</div>
+      <div class="goods-name">整花鸡</div>
+      <div class="goods-price">¥128 <button class="goods-add">+</button></div>
+    </div>
+    <div class="goods-card" onclick="addToCart('黑猪肉', 88)">
+      <div class="goods-img">🥩</div>
+      <div class="goods-name">黑猪肉</div>
+      <div class="goods-price">¥88 <button class="goods-add">+</button></div>
+    </div>
+    <div class="goods-card" onclick="addToCart('代养羊', 198)">
+      <div class="goods-img">🐑</div>
+      <div class="goods-name">代养羊</div>
+      <div class="goods-price">¥198 <button class="goods-add">+</button></div>
+    </div>
+    <div class="goods-card" onclick="addToCart('饲料', 8)">
+      <div class="goods-img">🌾</div>
+      <div class="goods-name">饲料</div>
+      <div class="goods-price">¥8 <button class="goods-add">+</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- 底部 -->
+<footer>
+  <div class="foot-item active" onclick="switchTab('home')"><div class="foot-icon">🏠</div>推荐</div>
+  <div class="foot-item" onclick="switchTab('search')"><div class="foot-icon">🔍</div>M友</div>
+  <div class="foot-item" onclick="switchTab('raise')"><div class="foot-icon">🛒</div>代养</div>
+  <div class="foot-item" onclick="switchTab('list')"><div class="foot-icon">👤</div>项单</div>
+  <div class="foot-item" onclick="showSettings()"><div class="foot-icon">⭐</div>我的</div>
+</footer>
+
+<!-- 登录/注册弹窗 -->
+<div class="modal-mask" id="loginModal">
+  <div class="modal" style="width:90%;">
+    <div class="modal-close" onclick="hideLogin()">×</div>
+    <div class="modal-title">手机号登录/注册</div>
+    <select class="form-input"><option>+86</option></select>
+    <input type="tel" class="form-input" placeholder="手机号" id="phoneInput">
+    <div class="verify-row">
+      <input type="password" class="form-input" placeholder="密码/验证码" id="pwdInput">
+      <button class="btn-verify" onclick="getVerifyCode()">获取验证码</button>
+    </div>
+    <div style="font-size:12px;color:#666;margin:5px 0;display:flex;align-items:center;">
+      <input type="checkbox" id="agreeCheck" style="width:14px;height:14px;margin-right:5px;"> 整果/车架，同意协议
+    </div>
+    <div class="modal-btns">
+      <button class="btn-green" onclick="doLogin()">登录</button>
+      <button class="btn-orange" onclick="doRegister()">注册</button>
+    </div>
+    <div style="text-align:center;margin-top:10px;font-size:12px;color:#999;">忘记密码？</div>
+  </div>
+</div>
+
+<!-- 分享面板 -->
+<div class="share-panel" id="sharePanel">
+  <div style="text-align:center;font-weight:bold;font-size:16px;margin-bottom:10px;">分享润林牧场</div>
+  <div class="share-grid">
+    <div class="share-item" onclick="alert('请使用微信客户端分享')"><div class="share-icon bg-wechat">💬</div>微信好友</div>
+    <div class="share-item" onclick="alert('分享到朋友圈（模拟）')"><div class="share-icon bg-wechat">📢</div>朋友圈</div>
+    <div class="share-item" onclick="copyLink()"><div class="share-icon bg-link">🔗</div>复制链接</div>
+    <div class="share-item" onclick="genQrCode('fullQr')"><div class="share-icon bg-qr">📷</div>生成二维码</div>
+  </div>
+  <div style="text-align:center;margin-top:20px;"><button onclick="hideShare()" style="background:#ccc;color:#333;border:none;padding:10px 30px;border-radius:20px;">取消</button></div>
+  <div id="fullQr" style="text-align:center;margin-top:15px;"></div>
+</div>
+
+<!-- 购物车 -->
+<div class="modal-mask" id="cartModal">
+  <div class="modal" style="width:90%;">
+    <div class="modal-close" onclick="hideCart()">×</div>
+    <div class="modal-title">购物车</div>
+    <div class="cart-list" id="cartList"><div style="text-align:center;color:#999;padding:20px;">购物车空空如也</div></div>
+    <div class="cart-total" id="cartTotal">合计：¥0.00</div>
+    <button class="btn-orange" style="width:100%;margin-top:15px;padding:12px;border:none;border-radius:5px;color:#fff;font-size:16px;" onclick="alert('结算成功！')">结算</button>
+  </div>
+</div>
 
 <script>
-const goods = [
-  {id:1,name:'精品羊排',price:68,tag:'meat',icon:'🥩'},
-  {id:2,name:'鲜羊肉卷',price:45,tag:'meat',icon:'🍖'},
-  {id:3,name:'羊腿肉',price:55,tag:'meat',icon:'🦵'},
-  {id:4,name:'湖羊代养',price:1280,tag:'raise',icon:'🐑'},
-  {id:5,name:'黑头羊代养',price:1580,tag:'raise',icon:'🐏'},
-  {id:6,name:'青贮饲料',price:35,tag:'feed',icon:'🌾'}
-];
-let cart = JSON.parse(localStorage.getItem('cart')||'[]');
-let users = JSON.parse(localStorage.getItem('users')||'{}');
-let currentUser = localStorage.getItem('currentUser')||null;
-let fontLevel = parseInt(localStorage.getItem('font')||'2');
-let bright = parseInt(localStorage.getItem('bright')||'100');
-let isReg = false;
-
-if(!users['13800138000']) users['13800138000']={pwd:'123456',phone:'13800138000'};
-
-function renderGoods(list) {
-  const box = document.getElementById('goodsList');
-  box.innerHTML = '';
-  (list||goods).forEach(g => {
-    box.innerHTML += `<div class="goods-card">
-      <div class="goods-img">${g.icon}</div>
-      <div class="goods-info">
-        <div class="goods-name">${g.name}</div>
-        <div class="goods-price">￥${g.price}</div>
-        <button class="goods-btn" onclick="addCart(${g.id})">加入购物车</button>
-      </div>
-    </div>`;
-  });
-}
-renderGoods();
-applyFont(fontLevel);
-applyBright(bright);
-renderCart();
-
-function doSearch() {
-  const k = document.getElementById('searchInput').value.trim();
-  if(!k) { renderGoods(); return; }
-  renderGoods(goods.filter(g => g.name.includes(k)||g.tag.includes(k)));
-}
-function filterGoods(tag) { renderGoods(goods.filter(g => g.tag===tag)); }
-function addCart(id) {
-  const g = goods.find(x=>x.id===id);
-  cart.push(g);
-  localStorage.setItem('cart',JSON.stringify(cart));
-  renderCart();
-  showToast('已加入购物车');
-}
-function renderCart() {
-  const list = document.getElementById('cartList');
-  let total=0;
-  list.innerHTML='';
-  cart.forEach((x,i)=>{
-    total+=x.price;
-    list.innerHTML+=`<div class="cart-item"><span>${x.name} ￥${x.price}</span><button onclick="delCart(${i})" style="background:#f44336;color:#fff;border:none;padding:4px 10px;border-radius:4px;">删</button></div>`;
-  });
-  document.getElementById('cartTotal').innerText='合计：￥'+total;
-  const badge=document.getElementById('cartBadge');
-  badge.innerText=cart.length;
-  badge.style.display=cart.length?'flex':'none';
-  document.getElementById('emptyCart').style.display=cart.length?'none':'block';
-}
-function delCart(i) { cart.splice(i,1); localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); }
-function checkout() {
-  if(!currentUser) { showToast('请先登录'); showLogin(); return; }
-  if(!cart.length) { showToast('购物车为空'); return; }
-  showToast('结算成功（演示）'); cart=[]; localStorage.setItem('cart','[]'); renderCart(); hideModal('cartModal');
-}
-function showCart() { if(!currentUser){showLogin();return;} renderCart(); document.getElementById('cartModal').classList.add('active'); }
-function showLogin() { document.getElementById('loginModal').classList.add('active'); }
-function toggleLoginReg() {
-  isReg=!isReg;
-  document.getElementById('loginTitle').innerText=isReg?'注册账号':'手机号登录';
-  document.getElementById('code').style.display=isReg?'block':'none';
-}
-function doLogin() {
-  const phone=document.getElementById('phone').value;
-  const pwd=document.getElementById('pwd').value;
-  if(isReg) {
-    const code=document.getElementById('code').value;
-    if(!code) { showToast('请输入验证码'); return; }
-    users[phone]={pwd,phone};
-    localStorage.setItem('users',JSON.stringify(users));
-    showToast('注册成功，请登录');
-    isReg=false; toggleLoginReg();
-    return;
+  // 移动端点击修复
+  document.addEventListener('touchstart', function(){}, {passive: true});
+  
+  let cart = [];
+  
+  function showLogin() { document.getElementById('loginModal').style.display = 'flex'; }
+  function hideLogin() { document.getElementById('loginModal').style.display = 'none'; }
+  function getVerifyCode() { alert('验证码已发送(模拟)'); }
+  function doLogin() { 
+    if(document.getElementById('agreeCheck').checked) { alert('登录成功！'); hideLogin(); } 
+    else { alert('请先勾选协议'); }
   }
-  if(!users[phone]||users[phone].pwd!==pwd) { showToast('账号或密码错误'); return; }
-  currentUser=phone;
-  localStorage.setItem('currentUser',phone);
-  document.getElementById('curUser').innerText=phone;
-  hideModal('loginModal');
-  showToast('登录成功');
-}
-function doLogout() { currentUser=null; localStorage.removeItem('currentUser'); hideModal('settingsModal'); showToast('已退出'); }
-function showSettings() {
-  if(!currentUser) { showLogin(); return; }
-  document.getElementById('curUser').innerText=currentUser;
-  document.getElementById('settingsModal').classList.add('active');
-}
-function switchTab(t) {
-  if(t==='cart') showCart();
-  else if(t==='category') { document.getElementById('searchInput').focus(); }
-  else if(t==='home') { renderGoods(); window.scrollTo(0,0); }
-}
-function showOrders() { showToast('订单功能（演示）'); }
-function showWechatPay() { document.getElementById('wechatModal').classList.add('active'); }
-function changeFont(v) {
-  fontLevel=v; localStorage.setItem('font',v); applyFont(v);
-}
-function applyFont(v) {
-  document.body.style.fontSize=['14px','16px','18px'][v-1];
-  const s=document.getElementById('fontSlider'); if(s) s.value=v;
-  const l=document.getElementById('fontLabel'); if(l) l.innerText=['小','标准','大'][v-1];
-}
-function changeBrightness(v) {
-  bright=v; localStorage.setItem('bright',v); applyBright(v);
-}
-function applyBright(v) {
-  document.getElementById('brightnessMask').style.opacity=(100-v)/100;
-  const s=document.getElementById('brightSlider'); if(s) s.value=v;
-  const l=document.getElementById('brightLabel'); if(l) l.innerText=v+'%';
-}
-function showPwdModal() { hideModal('settingsModal'); document.getElementById('pwdModal').classList.add('active'); }
-function changePwd() {
-  const old=document.getElementById('oldPwd').value;
-  const np=document.getElementById('newPwd').value;
-  const np2=document.getElementById('newPwd2').value;
-  if(users[currentUser].pwd!==old
+  function doRegister() { alert('注册成功！'); hideLogin(); }
+  
+  function showShare() { document.getElementById('sharePanel').style.display = 'block'; }
+  function hideShare() { document.getElementById('sharePanel').style.display = 'none'; }
+  function copyLink() { 
+    let url = window.location.href;
+    navigator.clipboard ? navigator.clipboard.writeText(url) : prompt('复制链接', url);
+    alert('链接已复制，快去分享吧！');
+  }
+  
+  // 简易二维码生成（使用字符画模拟，真实环境可引入qrcode.js）
+  function genQrCode(targetId) {
+    let el = document.getElementById(targetId);
+    let url = encodeURIComponent(window.location.href);
+    // 用纯CSS+字符模拟二维码样式
+    el.innerHTML = '<div style="display:inline-block;padding:10px;background:#fff;border:2px solid #333;font-family:monospace;font-size:10px;line-height:1;word-break:break-all;">' +
+      '█████████<br>█ ▄▀▄ █<br>██▀▄▀██<br>█▄▀ ▀▄█<br>█████████<br><span style="font-size:12px;color:#8B4513;">润林牧场QR</span></div>' +
+      '<div style="font-size:12px;color:#666;margin-top:5px;">截图保存二维码分享</div>';
+    if(targetId === 'miniQr') { el.style.width='80px';el.style.height='80px';el.style.fontSize='6px'; }
+  }
+  
+  function showCart() { 
+    let list = document.getElementById('cartList');
+    if(cart.length === 0) list.innerHTML = '<div style="text-align:center;color:#999;padding:20px;">购物车空空如也</div>';
+    else list.innerHTML = cart.map((item,i) => `<div class="cart-item"><span>${item.name}</span><span>¥${item.price} <span style="color:#e74c3c;margin-left:5px;" onclick="removeCart(${i})">×</span></span></div>`).join('');
+    let total = cart.reduce((s,i)=>s+i.price,0);
+    document.getElementById('cartTotal').innerText = `合计：¥${total.toFixed(2)}`;
+    document.getElementById('cartModal').style.display = 'flex';
+  }
+  function hideCart() { document.getElementById('cartModal').style.display = 'none'; }
+  function addToCart(name, price) { 
+    cart.push({name, price}); 
+    document.getElementById('cartBadge').innerText = cart.length;
+    alert(`已加入购物车：${name}`);
+  }
+  function removeCart(i) { cart.splice(i,1); document.getElementById('cartBadge').innerText = cart.length; showCart(); }
+  
+  function switchTab(tab) { 
+    document.querySelectorAll('.foot-item').forEach(f=>f.classList.remove('active'));
+    if(event && event.currentTarget) event.currentTarget.classList.add('active');
+    if(tab==='buy') alert('买肉专区（模拟跳转）'); 
+    if(tab==='raise') alert('代养服务（模拟跳转）');
+    if(tab==='list') alert('项单列表（模拟跳转）');
+    if(tab==='home') { /* 首页 */ }
+  }
+  function showOrders() { alert('订单页面（模拟跳转）'); }
+  function showSettings() { alert('个人中心（模拟跳转）'); }
+  function doSearch() { 
+    let v = document.getElementById('searchInput').value;
+    alert(v ? '搜索：'+v : '请输入搜索内容');
+  }
+  
+  // 搜索回车
+  document.getElementById('searchInput').addEventListener('keypress', function(e) {
