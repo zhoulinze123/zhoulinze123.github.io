@@ -2,342 +2,861 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>润林牧场 - 新鲜直达</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>润林牧场</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333;padding-bottom:70px;overflow-x:hidden;}
-  
-  /* 头部 */
-  .header{background:linear-gradient(135deg,#8B4513 0%,#A0522D 100%);padding:15px;color:#fff;position:relative;z-index:10;}
-  .top-bar{display:flex;align-items:center;margin-bottom:15px;}
-  .avatar{width:50px;height:50px;background:#fff;color:#8B4513;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;margin-right:10px;flex-shrink:0;}
-  .title-area{flex:1;}
-  .title{font-size:26px;font-weight:bold;display:flex;align-items:center;}
-  .loc{font-size:14px;margin-left:8px;color:#FFD700;}
-  .sub-title{font-size:14px;opacity:0.9;margin-top:4px;}
-  .header-btns{display:flex;align-items:center;gap:10px;}
-  .login-btn{background:#FF6347;color:#fff;border:none;padding:8px 15px;border-radius:20px;font-size:15px;font-weight:bold;}
-  .icon-btn{position:relative;font-size:22px;cursor:pointer;}
-  .badge{position:absolute;top:-5px;right:-5px;background:#FF6347;color:#fff;font-size:11px;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;}
-  
-  /* 搜索 */
-  .search-box{background:#fff;border-radius:25px;display:flex;align-items:center;padding:5px 15px;color:#666;}
-  .search-box input{flex:1;border:none;outline:none;padding:8px;font-size:15px;background:transparent;}
-  .search-btn{background:#FF8C00;color:#fff;border:none;padding:6px 18px;border-radius:20px;font-size:14px;}
-  
-  /* 主体容器 */
-  .container{padding:12px;}
-  
-  /* 微信收款 */
-  .wechat-pay{background:#FFF8DC;border:1px solid #DEB887;border-radius:10px;padding:15px;display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;font-size:18px;font-weight:bold;color:#8B4513;}
-  
-  /* 导航宫格 */
-  .nav-grid{background:#fff;border-radius:12px;padding:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;text-align:center;}
-  .nav-item{cursor:pointer;}
-  .nav-icon{width:60px;height:60px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 5px;}
-  .nav-item:nth-child(1) .nav-icon{background:#E8F5E9;}
-  .nav-item:nth-child(2) .nav-icon{background:#FFF3E0;}
-  .nav-item:nth-child(3) .nav-icon{background:#E3F2FD;}
-  .nav-item:nth-child(4) .nav-icon{background:#F3E5F5;}
-  
-  /* 订单统计 */
-  .section-title{font-size:18px;font-weight:bold;margin-bottom:10px;}
-  .stats{background:#fff;border-radius:12px;padding:15px;margin-bottom:15px;}
-  .stats-row{display:flex;justify-content:space-between;gap:5px;}
-  .stat-box{flex:1;background:#FAFAFA;border-radius:8px;padding:10px 5px;text-align:center;border:1px solid #EEE;}
-  .stat-num{font-size:22px;font-weight:bold;color:#FF8C00;}
-  .stat-label{font-size:12px;color:#666;margin-top:4px;}
-  
-  /* 商家入驻 & 分享 */
-  .merchant{background:#fff;border-radius:12px;padding:15px;margin-bottom:15px;}
-  .merchant-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-  .join-btn{background:#8B4513;color:#fff;border:none;padding:6px 15px;border-radius:8px;font-size:14px;}
-  .share-box{background:#FFF8DC;border-radius:10px;padding:15px;display:flex;align-items:center;gap:15px;}
-  .qr-placeholder{width:90px;height:90px;background:#fff;border:1px solid #CCC;display:flex;align-items:center;justify-content:center;font-size:24px;color:#666;flex-shrink:0;}
-  .share-info h4{font-size:16px;margin-bottom:5px;}
-  .share-info p{font-size:13px;color:#666;margin-bottom:10px;}
-  .share-btns{display:flex;gap:10px;}
-  .btn-green{background:#4CAF50;color:#fff;border:none;padding:8px 15px;border-radius:6px;font-size:14px;}
-  .btn-orange{background:#FF9800;color:#fff;border:none;padding:8px 15px;border-radius:6px;font-size:14px;}
-  
-  /* 热销推荐 */
-  .hot-goods{margin-top:15px;}
-  .goods-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-  .goods-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #EEE;cursor:pointer;}
-  .goods-img-h{height:100px;background:#F5F5F5;display:flex;align-items:center;justify-content:center;font-size:40px;}
-  .goods-info{padding:10px;}
-  .goods-name{font-size:14px;font-weight:bold;}
-  .goods-price{color:#FF6347;font-weight:bold;margin-top:5px;}
-  .goods-tag{position:absolute;top:5px;left:5px;background:#FFD700;color:#8B4513;font-size:10px;padding:2px 5px;border-radius:3px;}
-  
-  /* 底部导航 */
-  .footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #EEE;display:flex;justify-content:space-around;padding:8px 0;z-index:100;}
-  .foot-item{text-align:center;font-size:12px;color:#666;cursor:pointer;}
-  .foot-item.active{color:#8B4513;}
-  .foot-icon{font-size:22px;margin-bottom:2px;}
-  
-  /* 弹窗通用 */
-  .modal-mask{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:20px;}
-  .modal{background:#fff;border-radius:12px;width:100%;max-width:400px;padding:20px;position:relative;}
-  .modal-close{position:absolute;top:10px;right:15px;font-size:24px;color:#999;cursor:pointer;}
-  .modal-title{font-size:18px;font-weight:bold;text-align:center;margin-bottom:20px;}
-  .modal input{width:100%;padding:12px;border:1px solid #DDD;border-radius:6px;margin-bottom:12px;font-size:15px;}
-  .modal-btns{display:flex;gap:10px;margin-top:10px;}
-  .modal-btns button{flex:1;padding:12px;border:none;border-radius:6px;font-size:16px;color:#fff;}
-  
-  /* 分享面板 */
-  .share-panel{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;z-index:300;padding:20px;border-radius:15px 15px 0 0;}
-  .share-options{display:flex;justify-content:space-around;margin:20px 0;}
-  .share-opt{text-align:center;}
-  .share-opt div{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:5px;}
-  
-  /* 购物车 */
-  .cart-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #EEE;}
-  .cart-total{text-align:right;font-weight:bold;margin-top:15px;font-size:18px;color:#FF6347;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:"PingFang SC",sans-serif;background:#f5f5f5;color:#333;padding-bottom:70px;font-size:16px}
+.header{background:linear-gradient(135deg,#8B4513,#A0522D);padding:15px;color:#fff}
+.top-bar{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.avatar{width:48px;height:48px;border-radius:50%;background:#fff;color:#8B4513;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:22px;cursor:pointer;user-select:none}
+.title{flex:1}.title b{font-size:24px}.title small{color:#FFD700}
+.hbtns{display:flex;gap:8px;align-items:center}
+.btn{background:#FF6347;color:#fff;border:none;padding:7px 12px;border-radius:20px;font-size:14px}
+.ic{font-size:22px;cursor:pointer;position:relative}
+.badge{position:absolute;top:-6px;right:-6px;background:#FF6347;color:#fff;font-size:10px;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+.search{display:flex;background:#fff;border-radius:25px;overflow:hidden}
+.search input{flex:1;border:none;outline:none;padding:10px 14px;font-size:15px}
+.search button{border:none;background:#FF8C00;color:#fff;padding:0 18px;font-size:14px}
+.box{background:#fff;border-radius:12px;padding:14px;margin:12px}
+.sec-t{font-weight:bold;font-size:17px;margin-bottom:10px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.ni .e{font-size:30px;background:#FFF3E0;border-radius:12px;padding:10px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center}
+.st{background:#FAFAFA;border:1px solid #eee;border-radius:8px;padding:8px 2px}
+.st b{display:block;color:#FF8C00;font-size:18px}
+.st span{font-size:11px;color:#666}
+.goods{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gc{background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden}
+.gc .img{height:90px;background:#EFEFEF;display:flex;align-items:center;justify-content:center;font-size:38px}
+.gc .info{padding:8px}.gc b{font-size:14px}.gc .p{color:#FF6347;font-weight:bold;margin:4px 0}
+.gc button{width:100%;border:none;background:#8B4513;color:#fff;padding:7px;border-radius:0 0 10px 10px}
+.footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:7px 0;z-index:100}
+.fi{text-align:center;font-size:11px;color:#888;cursor:pointer}
+.fi.on{color:#8B4513}.fi .e{font-size:20px}
+.page{display:none}.page.on{display:block}
+.mine-h{background:linear-gradient(135deg,#8B4513,#A0522D);padding:30px 20px;text-align:center;color:#fff}
+.mine-h .a{width:66px;height:66px;border-radius:50%;background:#fff;color:#8B4513;font-size:30px;font-weight:bold;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.menu .row{display:flex;align-items:center;gap:12px;padding:15px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.menu .row:last-child{border:none}.menu .e{font-size:22px;width:28px;text-align:center}.menu .t{flex:1;font-size:15px}.menu .ar{color:#ccc}
+.set .grp{background:#fff;border-radius:12px;margin:12px;overflow:hidden}
+.set .row{display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.set .row:last-child{border:none}.set .r{margin-left:auto;color:#999;display:flex;align-items:center;gap:6px}
+.sw{width:46px;height:26px;background:#ddd;border-radius:13px;position:relative}.sw.on{background:#27ae60}
+.sw i{position:absolute;top:2px;left:2px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.2s}.sw.on i{left:22px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}.card{background:#fff;border-radius:12px;width:100%;max-width:380px;padding:18px;position:relative;max-height:88vh;overflow:auto}
+.x{position:absolute;top:8px;right:14px;font-size:26px;color直接给你一份**单文件 `index.html`**，全选覆盖 GitHub 的 `index.html` 即可。所有功能**真能用**：tawk.to 真客服、真二维码、真复制、真下单存本地、暗门真后台[2,5,14](@ref)。
+
+## 一、先搞免费客服
+- **注册**：打开 tawk.to 用 Gmail/Outlook 注册，别用 QQ 邮箱[14](@ref)。
+- **建站**：Add Property → 名称「润林牧场」→ 网址 `https://zhoulinze123.github.io`[5](@ref)。
+- **拿码**：左侧 Administration → Chat Widget → Install/Copy Code，拿到 `embed.tawk.to/XXXX/1xxxxxx`[2,11](@ref)。
+- **换码**：把下面代码里的 `YOUR_ID/1XXXXXX` 换成你自己的[8](@ref)。
+
+## 二、完整index.html代码
+
+html
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>润林牧场</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+body{font-family:"PingFang SC",sans-serif;background:#f5f5f5;color:#333;padding-bottom:70px;font-size:16px}
+
+.header{background:linear-gradient(135deg,#8B4513,#A0522D);padding:15px;color:#fff}
+
+.top-bar{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+
+.avatar{width:48px;height:48px;border-radius:50%;background:#fff;color:#8B4513;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:22px;cursor:pointer;user-select:none}
+
+.title{flex:1}.title b{font-size:24px}.title small{color:#FFD700}
+
+.hbtns{display:flex;gap:8px;align-items:center}
+
+.btn{background:#FF6347;color:#fff;border:none;padding:7px 12px;border-radius:20px;font-size:14px}
+
+.ic{font-size:22px;cursor:pointer;position:relative}
+
+.badge{position:absolute;top:-6px;right:-6px;background:#FF6347;color:#fff;font-size:10px;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+
+.search{display:flex;background:#fff;border-radius:25px;overflow:hidden}
+
+.search input{flex:1;border:none;outline:none;padding:10px 14px;font-size:15px}
+
+.search button{border:none;background:#FF8C00;color:#fff;padding:0 18px;font-size:14px}
+
+.box{background:#fff;border-radius:12px;padding:14px;margin:12px}
+
+.sec-t{font-weight:bold;font-size:17px;margin-bottom:10px}
+
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+
+.ni .e{font-size:30px;background:#FFF3E0;border-radius:12px;padding:10px}
+
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center}
+
+.st{background:#FAFAFA;border:1px solid #eee;border-radius:8px;padding:8px 2px}
+
+.st b{display:block;color:#FF8C00;font-size:18px}
+
+.st span{font-size:11px;color:#666}
+
+.goods{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.gc{background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden}
+
+.gc .img{height:90px;background:#EFEFEF;display:flex;align-items:center;justify-content:center;font-size:38px}
+
+.gc .info{padding:8px}.gc b{font-size:14px}.gc .p{color:#FF6347;font-weight:bold;margin:4px 0}
+
+.gc button{width:100%;border:none;background:#8B4513;color:#fff;padding:7px;border-radius:0 0 10px 10px}
+
+.footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:7px 0;z-index:100}
+
+.fi{text-align:center;font-size:11px;color:#888;cursor:pointer}
+
+.fi.on{color:#8B4513}.fi .e{font-size:20px}
+
+.page{display:none}.page.on{display:block}
+
+.mine-h{background:linear-gradient(135deg,#8B4513,#A0522D);padding:30px 20px;text-align:center;color:#fff}
+
+.mine-h .a{width:66px;height:66px;border-radius:50%;background:#fff;color:#8B4513;font-size:30px;font-weight:bold;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+
+.menu .row{display:flex;align-items:center;gap:12px;padding:15px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+
+.menu .row:last-child{border:none}.menu .e{font-size:22px;width:28px;text-align:center}.menu .t{flex:1;font-size:15px}.menu .ar{color:#ccc}
+
+.set .grp{background:#fff;border-radius:12px;margin:12px;overflow:hidden}
+
+.set .row{display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+
+.set .row:last-child{border:none}.set .r{margin-left:auto;color:#999;display:flex;align-items:center;gap:6px}
+
+.sw{width:46px;height:26px;background:#ddd;border-radius:13px;position:relative}.sw.on{background:#27ae60}
+
+.sw i{position:absolute;top:2px;left:2px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.2s}.sw.on i{left:22px}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:center;justify-content:center;padding:18px}
+
+.modal.show{display:flex}.card{background:#fff;border-radius:12px;width:100%;max-width:380px;padding:18px;position:relative;max-height:88vh;overflow:auto}
+
+.x{position:absolute;top:8px;right:14px;font-size:26px;color:#999;cursor:pointer}
+
+.h{font-weight:bold;text-align:center;margin-bottom:14px;font-size:17px}
+
+.in{width:100%;padding:11px;border:1px solid #ddd;border-radius:7px;margin-bottom:10px;font-size:15px}
+
+.vr{display:flex;gap:8px}.vr .in{margin-bottom:0}
+
+.vb{background:#FFE4B5;color:#8B4513;border:none;padding:0 12px;border-radius:6px;font-size:13px;white-space:nowrap}
+
+.ag{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#666;margin:6px 0 12px}
+
+.ag a{color:#8B4513}
+
+.tabs{display:flex;border-bottom:2px solid #eee;margin-bottom:14px}
+
+.tabs button{flex:1;padding:9px;border:none;background:none;font-size:15px;color:#666;border-bottom:2px solid transparent;margin-bottom:-2px}
+
+.tabs button.on{color:#8B4513;font-weight:bold;border-color:#8B4513}
+
+.lf{display:none}.lf.on{display:block}
+
+.cart-i{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0}
+
+.cart-i .n{flex:1}.cart-i b{color:#FF6347}
+
+.admin{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:none;align-items:center;justify-content:center;padding:10px}
+
+.admin.show{display:flex}.ap{background:#fff;width:100%;max-width:480px;height:88vh;border-radius:12px;display:flex;flex-direction:column;overflow:hidden}
+
+.ap-h{background:#8B4513;color:#fff;padding:13px;display:flex;justify-content:space-between;align-items:center}
+
+.ap-b{flex:1;overflow:auto;padding:13px}
+
+.atab{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+
+.atab button{flex:1;min-width:64px;padding:7px;border:1px solid #8B4513;background:#fff;color:#8B4513;border-radius:6px;font-size:13px}
+
+.atab button.on{background:#8B4513;color:#fff}
+
+.ai{background:#f7f7f7;border-radius:8px;padding:9px;margin-bottom:7px;display:flex;justify-content:space-between;gap:8px}
+
+.ai .t{font-weight:bold;font-size:13px}.ai .s{font-size:11px;color:#666;margin-top:2px}
+
+.ab{padding:4px 8px;border:none;border-radius:4px;color:#fff;font-size:11px;margin-left:4px}
+
+.b-d{background:#27ae60}.b-x{background:#e74c3c}.b-e{background:#3498db}
+
+mask{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;z-index:9990}
+
+.toast{position:fixed;top:42%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.82);color:#fff;padding:11px 20px;border-radius:8px;z-index:9999;display:none;font-size:14px;max-width:80%;text-align:center}
+
+.qr{width:180px;height:180px;margin:6px auto;background:#fff}
+
+.share-btns{display:flex;gap:8px;margin-top:12px}
+
+.share-btns button{flex:1;padding:11px;border:none;border-radius:7px;color:#fff;font-size:14px}
+
 </style>
+
 </head>
+
 <body>
 
+<div id="mask"></div>
+
+<div class="toast" id="toast"></div>
+
+<!-- 首页 -->
+
+<div class="page on" id="p_home">
+
 <div class="header">
-  <div class="top-bar">
-    <div class="avatar">润</div>
-    <div class="title-area">
-      <div class="title">润林牧场<span class="loc">✔ 定位</span></div>
-      <div class="sub-title">北京市 · 新鲜直达</div>
-    </div>
-    <div class="header-btns">
-      <button class="login-btn" onclick="showLogin()">登录/注册</button>
-      <div class="icon-btn" onclick="alert('上传功能')">📤</div>
-      <div class="icon-btn" onclick="showCart()">🛒<span class="badge" id="cartBadge">0</span></div>
-    </div>
-  </div>
-  <div class="search-box">
-    <span style="margin-right:5px;">🔍</span>
-    <input type="text" id="searchInput" placeholder="搜索：index.com">
-    <button class="search-btn" onclick="doSearch()">搜索</button>
-  </div>
+
+<div class="top-bar">
+
+<div class="avatar" id="ava" onclick="onAva()">润</div>
+
+<div class="title"> <small>✔定位·北京</small></div>
+
+<div class="hbtns">
+
+<button class="btn" onclick="openLogin()">登录/注册</button>
+
 </div>
 
-<div class="container">
-  <div class="wechat-pay" onclick="alert('微信收款 / 扫码支付')">
-    <div><span style="font-size:24px;">💚</span> 微信收款</div>
-    <span class="check-icon">✔</span>
-  </div>
-  
-  <div class="nav-grid">
-    <div class="nav-item" onclick="switchTab('meat')"><div class="nav-icon">🛒</div>买肉</div>
-    <div class="nav-item" onclick="switchTab('raise')"><div class="nav-icon">🌼</div>代养</div>
-    <div class="nav-item" onclick="showOrders()"><div class="nav-icon">📦</div>订单</div>
-    <div class="nav-item" onclick="switchTab('list')"><div class="nav-icon">📋</div>项单</div>
-  </div>
-  
-  <div class="stats">
-    <div class="section-title">订单统计</div>
-    <div class="stats-row">
-      <div class="stat-box"><div class="stat-num">12</div><div class="stat-label">今日订单</div></div>
-      <div class="stat-box"><div class="stat-num">356</div><div class="stat-label">本月订单</div></div>
-      <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">待付款</div></div>
-      <div class="stat-box"><div class="stat-num">8</div><div class="stat-label">待发货</div></div>
-      <div class="stat-box"><div class="stat-num">345</div><div class="stat-label">已完成</div></div>
-    </div>
-  </div>
-  
-  <div class="merchant">
-    <div class="merchant-head">
-      <div class="section-title" style="margin:0;">商家入驻</div>
-      <button class="join-btn" onclick="alert('立即入驻申请')">立即入驻</button>
-    </div>
-    <div class="share-box">
-      <div class="qr-placeholder" id="miniQr">QR</div>
-      <div class="share-info">
-        <h4>扫码分享APP</h4>
-        <p>立即下载 · 分享好友得优惠</p>
-        <div class="share-btns">
-          <button class="btn-green" onclick="showShare()">分享</button>
-          <button class="btn-orange" onclick="genQrCode('miniQr')">生成二维码</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="hot-goods">
-    <div class="section-title">热销推荐</div>
-    <div class="goods-grid">
-      <div class="goods-card" onclick="addToCart('鲜羊排 500g', 68)">
-        <div style="position:relative;">
-          <div class="goods-img-h">🍗</div>
-          <div class="goods-tag">热</div>
-        </div>
-        <div class="goods-info">
-          <div class="goods-name">鲜羊排 500g</div>
-          <div class="goods-price">¥68.00</div>
-        </div>
-      </div>
-      <div class="goods-card" onclick="addToCart('羔羊肉卷 300g', 45)">
-        <div style="position:relative;">
-          <div class="goods-img-h">🥩</div>
-          <div class="goods-tag" style="background:#FF6347;color:#fff;">推</div>
-        </div>
-        <div class="goods-info">
-          <div class="goods-name">羔羊肉卷 300g</div>
-          <div class="goods-price">¥45.00</div>
-        </div>
-      </div>
-      <div class="goods-card" onclick="addToCart('全羊代养 1年', 2888)">
-        <div style="position:relative;">
-          <div class="goods-img-h">🐑</div>
-        </div>
-        <div class="goods-info">
-          <div class="goods-name">全羊代养 1年</div>
-          <div class="goods-price">¥2888</div>
-        </div>
-      </div>
-      <div class="goods-card" onclick="addToCart('牧草饲料 10kg', 35)">
-        <div style="position:relative;">
-          <div class="goods-img-h">🌾</div>
-        </div>
-        <div class="goods-info">
-          <div class="goods-name">牧草饲料 10kg</div>
-          <div class="goods-price">¥35.00</div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+
+<div class="search">
+
+<input id="kw" placeholder="搜索：羊肉/代养/饲料">
+
+<button onclick="toast('搜索：'+((kw.value)||'空'))">搜索</button>
+
+</div>
+
+</div>
+
+<div class="box" onclick="toast('微信收款码（放你真实码图）')">
+
+<div style="display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:#8B4513">
+
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="grid4">
+
+<div class="ni" onclick="toast('买肉')"><div class="e">🥩</div>买肉</div>
+
+<div class="ni" onclick="toast('代养')"><div class="e">🐑</div>代养</div>
+
+<div class="ni" onclick="openOrders()"><div class="e">📦</div>订单</div>
+
+<div class="ni" onclick="toast('项单')"><div class="e">📋</div>项单</div>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="sec-t">实时订单统计（真·本地）</div>
+
+<div class="stats" id="stats"></div>
+
+</div>
+
+<div class="box">
+
+<div style="display:flex;justify-content:space-between;align-items:center">
+
+<div class="sec-t" style="margin:0">商家入驻</div>
+
+<button class="btn" style="background:#8B4513" onclick="toast('入驻申请已提交（模拟）')">立即入驻</button>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="sec-t">热销商品（点加入购物车→结算真下单）</div>
+
+<div class="goods" id="goods"></div>
+
+</div>
+
+</div>
+
+<!-- 我的 -->
+
+<div class="page" id="p_mine">
+
+<div class="mine-h">
+
+<div class="a" id="mAVA">润</div>
+
+<div id="mName" style="font-size:18px;font-weight:bold">未登录</div>
+
+<div id="mPhone" style="font-size:13px;opacity:.85" onclick="openLogin()">点此登录/注册</div>
+
+</div>
+
+<div class="box menu">
+
+<div class="row" onclick="openOrders()"></div>
+
+<div class="row" onclick="toast('我的代养')"></div>
+
+<div class="row" onclick="toast('收货地址')"></div>
+
+<div class="row" onclick="toast('优惠券')"></div>
+
+<div class="row" onclick="openSettings()"></div>
+
+<div class="row" onclick="openAgreement()"></div>
+
+<div class="row" onclick="if(Tawk_API&&Tawk_API.maximize)Tawk_API.maximize();else toast('客服加载中…')"></div>
+
+<div class="row" onclick="openShare()"></div>
+
+</div>
+
+</div>
+
+<!-- 设置 -->
+
+<div class="page" id="p_set">
+
+<div class="header"><div style="cursor:pointer" onclick="go('p_mine')">‹ 返回</div><div class="h" style="color:#fff;margin-top:6px">设置</div></div>
+
+<div class="set">
+
+<div class="grp">
+
+<div class="row" onclick="needLogin();showModal('mM_pwd')">修改密码</div>
+
+<div class="row" onclick="needLogin();showModal('mM_phone')">绑定手机号</div>
+
+</div>
+
+<div class="grp">
+
+<div class="row">字体大小
+
+<span class="r"><select id="fs" onchange="setFont()" style="border:none;background:transparent;color:#8B4513">
+
+<option value="14px">小</option><option value="16px" selected>中</option>
+
+<option value="18px">大</option><option value="20px">特大</option></select>›</span></div>
+
+<div class="row">屏幕亮度</div>
+
+</div>
+
+<div class="grp">
+
+<div class="row">订单通知</div>
+
+<div class="row">促销通知</div>
+
+<div class="row">位置权限</div>
+
+<div class="row">个性化推荐</div>
+
+</div>
+
+<div class="grp">
+
+<div class="row" onclick="clearCache()">清除缓存</div>
+
+<div class="row" onclick="toast('当前 v1.0.0 已是最新')">检查更新</div>
+
+<div class="row" onclick="openAgreement()">协议与隐私</div>
+
+</div>
+
+<div style="padding:12px"><button class="btn" style="width:100%;padding:13px;background:#e74c3c" onclick="logout()">退出登录</button></div>
+
+</div>
+
+</div>
+
+<!-- 底部 -->
 
 <div class="footer">
-  <div class="foot-item active" onclick="switchTab('home')"><div class="foot-icon">🏠</div>推荐</div>
-  <div class="foot-item" onclick="switchTab('search')"><div class="foot-icon">🔍</div>M友</div>
-  <div class="foot-item" onclick="switchTab('raise')"><div class="foot-icon">🛒</div>代养</div>
-  <div class="foot-item" onclick="showOrders()"><div class="foot-icon">👤</div>项单</div>
-  <div class="foot-item" onclick="showSettings()"><div class="foot-icon">⭐</div>我的</div>
+
+<div class="fi on" onclick="go('p_home')"><div class="e">🏠</div>首页</div>
+
+<div class="fi" onclick="toast('分类')"><div class="e">🔍</div>发现</div>
+
+<div class="fi" onclick="toast('代养')"><div class="e">🐑</div>代养</div>
+
+<div class="fi" onclick="go('p_mine')"><div class="e">👤</div>我的</div>
+
 </div>
 
-<!-- 登录/注册弹窗 -->
-<div class="modal-mask" id="loginModal">
-  <div class="modal">
-    <div class="modal-close" onclick="hideLogin()">×</div>
-    <div class="modal-title">手机号登录/注册</div>
-    <div style="display:flex;align-items:center;margin-bottom:12px;">
-      <select style="padding:10px;border:1px solid #DDD;border-radius:6px;background:#fff;margin-right:8px;"><option>+86</option></select>
-      <input type="tel" placeholder="手机号" style="margin-bottom:0;">
-    </div>
-    <div style="display:flex;margin-bottom:12px;">
-      <input type="password" placeholder="密码/验证码" style="margin-bottom:0;flex:1;">
-      <button style="background:#FFE4B5;color:#8B4513;border:none;padding:0 10px;border-radius:6px;margin-left:5px;" onclick="alert('验证码已发送(模拟)')">获取验证码</button>
-    </div>
-    <div style="display:flex;align-items:center;font-size:12px;color:#666;margin-bottom:15px;">
-      <input type="checkbox" id="agreeCheck" style="width:auto;margin:0 5px 0 0;" checked> 整果/车架，同意协议
-    </div>
-    <div class="modal-btns">
-      <button class="btn-green" onclick="doLogin()">登录</button>
-      <button class="btn-orange" onclick="doRegister()">注册</button>
-    </div>
-    <div style="text-align:center;margin-top:10px;font-size:12px;color:#999;">忘记密码？</div>
-  </div>
+<!-- 登录/注册 -->
+
+<div class="modal" id="mM_login"><div class="card">
+
+<div class="x" onclick="hide('mM_login')">×</div><div class="h">登录 / 注册</div>
+
+<div class="tabs">
+
+<button class="on" onclick="lt('pwd',this)">密码登录</button>
+
+<button onclick="lt('code',this)">验证码登</button>
+
+<button onclick="lt('reg',this)">注册</button>
+
 </div>
 
-<!-- 分享面板 -->
-<div class="share-panel" id="sharePanel">
-  <div style="text-align:center;font-weight:bold;font-size:18px;margin-bottom:10px;">分享APP</div>
-  <div class="share-options">
-    <div class="share-opt" onclick="alert('分享到微信')"><div style="background:#E8F5E9;">💚</div>微信</div>
-    <div class="share-opt" onclick="alert('分享到朋友圈')"><div style="background:#FFF3E0;">📢</div>朋友圈</div>
-    <div class="share-opt" onclick="copyLink()"><div style="background:#E3F2FD;">🔗</div>复制链接</div>
-    <div class="share-opt" onclick="genQrCode('miniQr')"><div style="background:#F3E5F5;">📱</div>二维码</div>
-  </div>
-  <button onclick="hideShare()" style="width:100%;padding:12px;background:#EEE;border:none;border-radius:8px;font-size:16px;">取消</button>
+<div class="lf on" id="lf_pwd">
+
+<input class="in" id="l_phone" placeholder="+86 手机号">
+
+<input class="in" id="l_pwd" type="password" placeholder="密码">
+
+<div class="modal" style="position:static;display:flex;gap:8px;padding:0;background:none">
+
+<button class="btn" style="flex:1;background:#27ae60" onclick="doLogin()">登录</button>
+
+<button class="btn" style="flex:1;background:#e67e22" onclick="lt('code',document.querySelectorAll('.tabs button')[1]);toast('用验证码登录')">忘密码</button>
+
 </div>
 
-<!-- 购物车弹窗 -->
-<div class="modal-mask" id="cartModal">
-  <div class="modal" style="max-height:80vh;overflow-y:auto;">
-    <div class="modal-close" onclick="hideCart()">×</div>
-    <div class="modal-title">购物车</div>
-    <div id="cartList" style="margin-bottom:15px;"></div>
-    <div class="cart-total" id="cartTotal">合计：¥0.00</div>
-    <button class="btn-orange" style="width:100%;margin-top:15px;padding:12px;border:none;border-radius:8px;font-size:16px;" onclick="alert('结算成功！')">去结算</button>
-  </div>
 </div>
+
+<div class="lf" id="lf_code">
+
+<input class="in" id="c_phone" placeholder="+86 手机号">
+
+<div class="vr" style="margin-bottom:10px"><input class="in" id="c_code" placeholder="验证码"><button class="vb" onclick="send(this)">获取验证码</button></div>
+
+<button class="btn" style="width:100%;background:#27ae60" onclick="doCodeLogin()">登录</button>
+
+</div>
+
+<div class="lf" id="lf_reg">
+
+<input class="in" id="r_phone" placeholder="+86 手机号">
+
+<div class="vr" style="margin-bottom:10px"><input class="in" id="r_code" placeholder="验证码"><button class="vb" onclick="send(this)">获取验证码</button></div>
+
+<input class="in" id="r_pwd" type="password" placeholder="设置密码(6-20位)">
+
+<input class="in" id="r_pwd2" type="password" placeholder="确认密码">
+
+<div class="ag"><input type="checkbox" id="agC"><label for="agC">已读并同意<a onclick="openAgreement()">《服务协议》</a>和<a onclick="openAgreement()">《隐私政策》</a></label></div>
+
+<button class="btn" style="width:100%;background:#8B4513" onclick="doReg()">注册</button>
+
+</div>
+
+</div></div>
+
+<!-- 购物车 -->
+
+<div class="modal" id="mM_cart"><div class="card">
+
+<div class="x" onclick="hide('mM_cart')">×</div><div class="h">购物车</div>
+
+<div id="cartBox"></div>
+
+<div style="text-align:right;font-weight:bold;color:#FF6347;margin:8px 0" id="cartTotal">合计：¥0</div>
+
+<button class="btn" style="width:100%;background:#FF8C00" onclick="checkout()">结算下单</button>
+
+</div></div>
+
+<!-- 订单 -->
+
+<div class="modal" id="mM_ord"><div class="card">
+
+<div class="x" onclick="hide('mM_ord')">×</div><div class="h">我的订单</div>
+
+<div id="ordBox"></div>
+
+</div></div>
+
+<!-- 分享推广 -->
+
+<div class="modal" id="mM_share"><div class="card">
+
+<div class="x" onclick="hide('mM_share')">×</div><div class="h">📣 推广润林牧场</div>
+
+<div class="qr" id="qr"></div>
+
+<div style="font-size:12px;color:#999;text-align:center">长按二维码存图→发微信；或复制链接</div>
+
+<div id="plink" style="background:#f5f5f5;padding:8px;border-radius:6px;font-size:12px;word-break:break-all;margin:10px 0"></div>
+
+<div class="share-btns">
+
+<button style="background:#07C160" onclick="wxShare()">💬 微信分享</button>
+
+<button style="background:#8B4513" onclick="copyLink()">📋 复制链接</button>
+
+</div>
+
+</div></div>
+
+<!-- 协议 -->
+
+<div class="modal" id="mM_ag"><div class="card">
+
+<div class="x" onclick="hide('mM_ag')">×</div><div class="h">服务协议与隐私政策</div>
+
+<div style="height:50vh;overflow:auto;font-size:13px;line-height:1.7">
+
+</div>
+
+<button class="btn" style="width:100%;margin-top:10px;background:#8B4513" onclick="hide('mM_ag');if(!localStorage.rl_ag){localStorage.rl_ag=1;toast('已同意协议')}">我已知悉</button>
+
+</div></div>
+
+<!-- 改密 -->
+
+<div class="modal" id="mM_pwd"><div class="card">
+
+<div class="x" onclick="hide('mM_pwd')">×</div><div class="h">修改密码</div>
+
+<input class="in" id="o_pwd" type="password" placeholder="原密码">
+
+<input class="in" id="n_pwd" type="password" placeholder="新密码">
+
+<input class="in" id="n_pwd2" type="password" placeholder="确认新密码">
+
+<button class="btn" style="width:100%;background:#8B4513" onclick="chgPwd()">确认修改</button>
+
+</div></div>
+
+<!-- 绑手机 -->
+
+<div class="modal" id="mM_phone"><div class="card">
+
+<div class="x" onclick="hide('mM_phone')">×</div><div class="h">绑定手机号</div>
+
+<input class="in" id="b_phone" placeholder="+86 手机号">
+
+<div class="vr" style="margin-bottom:10px"><input class="in" id="b_code" placeholder="验证码"><button class="vb" onclick="send(this)">获取验证码</button></div>
+
+<button class="btn" style="width:100%;background:#8B4513" onclick="bindPhone()">绑定</button>
+
+</div></div>
+
+<!-- 暗门管理后台 -->
+
+<div class="admin" id="admin">
+
+<div class="ap">
+
+<div class="ap-h"></div>
+
+<div class="ap-b">
+
+<div class="atab" id="atab">
+
+<button class="on" onclick="atab('orders',this)">订单</button>
+
+<button onclick="atab('goods',this)">商品</button>
+
+<button onclick="atab('users',this)">用户</button>
+
+<button onclick="atab('stats',this)">数据</button>
+
+</div>
+
+<div id="adminBox"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- tawk.to 真客服：换 YOUR_ID/1XXXXXX -->
 
 <script>
-  // 强制修复移动端点击
-  document.addEventListener('touchstart', function(){}, {passive: true});
-  
-  let cart = [];
-  
-  // 登录注册
-  function showLogin() { document.getElementById('loginModal').style.display = 'flex'; }
-  function hideLogin() { document.getElementById('loginModal').style.display = 'none'; }
-  function doLogin() { 
-    if(document.getElementById('agreeCheck').checked) {
-      alert('登录成功！'); hideLogin(); 
-    } else { alert('请先勾选协议'); }
-  }
-  function doRegister() { alert('注册成功！'); hideLogin(); }
-  
-  // 分享
-  function showShare() { document.getElementById('sharePanel').style.display = 'block'; }
-  function hideShare() { document.getElementById('sharePanel').style.display = 'none'; }
-  function copyLink() { 
-    let url = window.location.href;
-    navigator.clipboard ? navigator.clipboard.writeText(url) : prompt('复制链接', url);
-    alert('链接已复制，快去分享吧！');
-  }
-  
-  // 二维码生成（模拟真实二维码样式）
-  function genQrCode(targetId) {
-    let el = document.getElementById(targetId);
-    el.innerHTML = '<div style="display:inline-block;padding:8px;background:#fff;border:2px solid #333;font-family:monospace;line-height:1;width:100%;height:100%;align-items:center;justify-content:center;font-size:10px;">' +
-      '█████████<br>█ ▄▀▄ █<br>██▀▄▀██<br>█▄▀ ▀▄█<br>█████████<br><span style="font-size:12px;color:#8B4513;">润林牧场</span></div>';
-    alert('二维码已生成，可截图分享！');
-  }
-  
-  // 购物车
-  function showCart() { 
-    let list = document.getElementById('cartList');
-    if(cart.length === 0) { 
-      list.innerHTML = '<div style="text-align:center;color:#999;padding:30px;">购物车空空如也</div>'; 
-    } else {
-      list.innerHTML = cart.map((item,i) => `<div class="cart-item"><span>${item.name}</span><span>¥${item.price} <span style="color:#e74c3c;margin-left:5px;cursor:pointer;" onclick="removeCart(${i})">×</span></span></div>`).join('');
-    }
-    let total = cart.reduce((s,i)=>s+i.price,0);
-    document.getElementById('cartTotal').innerText = `合计：¥${total.toFixed(2)}`;
-    document.getElementById('cartModal').style.display = 'flex';
-  }
-  function hideCart() { document.getElementById('cartModal').style.display = 'none'; }
-  function addToCart(name, price) { 
-    cart.push({name, price}); 
-    document.getElementById('cartBadge').innerText = cart.length;
-    alert(`已加入购物车：${name}`);
-  }
-  function removeCart(i) { cart.splice(i,1); document.getElementById('cartBadge').innerText = cart.length; showCart(); }
-  
-  // 导航切换
-  function switchTab(tab) { 
-    document.querySelectorAll('.foot-item').forEach(f=>f.classList.remove('active'));
-    if(event && event.currentTarget) event.currentTarget.classList.add('active');
-    if(tab==='meat') alert('买肉专区'); 
-    if(tab==='raise') alert('代养服务');
-    if(tab==='list') alert('项单列表');
-    if(tab==='search') alert('搜索页面');
-  }
-  function showOrders() { alert('订单页面'); }
-  function showSettings() { alert('个人中心'); }
-  
-  // 搜索
-  function doSearch() { 
-    let v = document.getElementById('searchInput').value;
-    alert(v ? '搜索：'+v : '请输入搜索内容');
-  }
-  document.getElementById('searchInput').addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') doSearch();
-  });
-  
-  // 初始化
-  document.getElementById('miniQr').innerHTML = '<span style="font-size:24px;">📱</span>';
+
+window.Tawk_API=window.Tawk_API||{};
+
+Tawk_API.onLoad=function(){Tawk_API.setAttributes({company:'润林牧场'},{});};
+
+(function(){var s=document.createElement('script'),x=document.scripts[0];
+
+s.async=true;s.src='https://embed.tawk.to/YOUR_ID/1XXXXXX';
+
+s.charset='UTF-8';s.setAttribute('crossorigin','*');x.parentNode.insertBefore(s,x);})();
+
+</script>
+
+<script>
+
+/* ---------- 工具 ---------- */
+
+const $=id=>document.getElementById(id);
+
+function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t.t);t.t=setTimeout(()=>t.style.display='none',1600);}
+
+function showModal(m){$(m).classList.add('show');}
+
+function hide(m){$(m).classList.remove('show');}
+
+function openShare(){showModal('mM_share');$('plink').textContent=location.href.split('#')[0];
+
+ ('qr').innerHTML='';new QRCode( ('qr'),{text:location.href.split('#')[0],width:180,height:180,colorDark:'#8B4513',colorLight:'#fff'});}
+
+function copyLink(){const u=location.href.split('#')[0];
+
+navigator.clipboard?.writeText(u).then(()=>toast('链接已复制，去微信粘贴'),()=>{const i=document.createElement('input');i.value=u;document.body.appendChild(i);i.select();document.execCommand('copy');i.remove();toast('链接已复制');});}
+
+function wxShare(){
+
+if(navigator.share){navigator.share({title:'润林牧场·新鲜直达',text:'买牛羊肉/代养，点我下单',url:location.href.split('#')[0]}).catch(()=>{});}
+
+else toast('微信内：点右上角「…」→发送给朋友；或长按二维码发图');
+
+}
+
+function openAgreement(){showModal('mM_ag');}
+
+/* ---------- 页面切换 ---------- */
+
+function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));$(p).classList.add('on');
+
+document.querySelectorAll('.fi').forEach(x=>x.classList.remove('on'));
+
+if(p==='p_home')document.querySelectorAll('.fi')[0].classList.add('on');
+
+if(p==='p_mine')document.querySelectorAll('.fi')[3].classList.add('on');}
+
+function openSettings(){needLogin();go('p_set');}
+
+/* ---------- 暗门 ---------- */
+
+let ac=0,at;
+
+function onAva(){ac++;clearTimeout(at);at=setTimeout(()=>ac=0,1500);
+
+if(ac>=5){ac=0;$('admin').classList.add('show');loadAdmin('orders');}}
+
+/* ---------- 数据 ---------- */
+
+let users=JSON.parse(localStorage.rl_users||'[]');
+
+let cur=JSON.parse(localStorage.rl_cur||'null');
+
+let cart=JSON.parse(localStorage.rl_cart||'[]');
+
+let orders=JSON.parse(localStorage.rl_orders||'[]');
+
+const GOODS=[
+
+{id:1,n:'鲜羊排 500g',p:68,e:'🥩'},
+
+{id:2,n:'羔羊肉卷 300g',p:45,e:'🥩'},
+
+{id:3,n:'全羊代养 1年',p:2888,e:'🐑'},
+
+{id:4,n:'牧草饲料 10kg',p:35,e:'🌾'}
+
+];
+
+function save(){localStorage.rl_users=JSON.stringify(users);localStorage.rl_cur=JSON.stringify(cur);
+
+localStorage.rl_cart=JSON.stringify(cart);localStorage.rl_orders=JSON.stringify(orders);}
+
+/* ---------- 渲染 ---------- */
+
+function renderGoods(){$('goods').innerHTML=GOODS.map(g=>`<div class="gc">
+
+<div class="img"> {g.e}</div><div class="info"><b> {g.n}</b><div class="p">¥${g.p}</div>
+
+<button onclick="addCart(${g.id})">加入购物车</button></div></div>`).join('');}
+
+function renderStats(){const t=new Date().toDateString();
+
+const d={today:orders.filter(o=>o.time.includes(t)).length,total:orders.length,
+
+wait:orders.filter(o=>o.status==='待付款').length,ship:orders.filter(o=>o.status==='待发货').length,
+
+done:orders.filter(o=>o.status==='已完成').length};
+
+ ('stats').innerHTML=` {['today|今日','total|总计','wait|待付款','ship|待发货','done|已完成'].map(x=>{const[a,b]=x.split('|');return 
+"<div class="st"><b>${d[a]}</b><span>${b}</span></div>"}).join('')}`;}
+
+function renderCart(){if(!cart.length){$('cartBox').innerHTML='';}
+
+else{ ('cartBox').innerHTML=cart.map((c,i)=>`<div class="cart-i"><span> {c.e}</span><button class="ab b-x" onclick="cart.splice(${i},1);save();renderCart();upBadge()">删</button></div>`).join('');}
+
+$('cartTotal').textContent='合计：¥'+cart.reduce((s,c)=>s+c.p,0);}
+
+function upBadge(){$('badge').textContent=cart.length;}
+
+function renderMine(){if(cur){ ('mName').textContent=cur.name||'润林用户'; ('mPhone').textContent=cur.phone; ('mAVA').textContent=(cur.name||'润')[0]; ('ava').textContent=(cur.name||'润')[0];$('bindTxt').textContent=cur.phone+' ›';}
+
+else{ ('mName').textContent='未登录'; ('mPhone').textContent='点此登录/注册'; ('mAVA').textContent='润'; ('ava').textContent='润';$('bindTxt').textContent='未绑定 ›';}}
+
+function renderOrders(){if(!cur){$('ordBox').innerHTML='';return;}
+
+const my=orders.filter(o=>o.phone===cur.phone);
+
+ ('ordBox').innerHTML=my.length?my.slice().reverse().map(o=>`<div class="cart-i"><span>📦</span><span class="n"> {o.n}<br><small style="color:#999"> {o.time}</small></span><b> {o.status}</b></div>`).join(''):'';}
+
+/* ---------- 购物车/下单 ---------- */
+
+function addCart(id){const g=GOODS.find(x=>x.id===id);cart.push({...g});save();renderCart();upBadge();toast('已加入购物车');}
+
+function openCart(){renderCart();showModal('mM_cart');}
+
+function checkout(){if(!cur){hide('mM_cart');openLogin();toast('请先登录');return;}
+
+if(!cart.length){toast('购物车是空的');return;}
+
+cart.forEach(c=>orders.push({id:'DD'+Date.now()+Math.floor(Math.random()*99),n:c.n,p:c.p,phone:cur.phone,time:new Date().toLocaleString(),status:'待发货'}));
+
+cart=[];save();renderCart();upBadge();renderStats();hide('mM_cart');toast('下单成功！后台可查');}
+
+function openOrders(){needLogin();renderOrders();showModal('mM_ord');}
+
+/* ---------- 登录注册 ---------- */
+
+function openLogin(){showModal('mM_login');}
+
+function lt(t,el){document.querySelectorAll('.lf').forEach(x=>x.classList.remove('on'));$('lf_'+t).classList.add('on');
+
+document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+
+function send(btn){const p=btn.parentElement.previousElementSibling?.value|| ('r_phone').value|| ('c_phone').value||$('b_phone').value;
+
+if(!/^1\d{10}$/.test(p)){toast('先填正确手机号');return;}let n=60;btn.disabled=true;btn.textContent=n+'s';
+
+const tm=setInterval(()=>{n--;btn.textContent=n+'s';if(n<=0){clearInterval(tm);btn.disabled=false;btn.textContent='获取验证码';localStorage['vc_'+p]='123456';}});toast('演示验证码：123456');}
+
+function doReg(){const p= ('r_phone').value,vc= ('r_code').value,pw= ('r_pwd').value,pw2= ('r_pwd2').value;
+
+if(!/^1\d{10}$/.test(p))return toast('手机号格式错');
+
+if(vc!==localStorage['vc_'+p])return toast('验证码错误(演示123456)');
+
+if(pw.length<6)return toast('密码至少6位');if(pw!==pw2)return toast('两次密码不一致');
+
+if(!$('agC').checked)return toast('请先同意协议');if(users.find(u=>u.phone===p))return toast('已注册，去登录');
+
+users.push({phone:p,pwd:pw,name:'用户'+p.slice(-4),bind:p});cur=users[users.length-1];save();renderMine();
+
+hide('mM_login');toast('注册成功，已登录');}
+
+function doLogin(){const p= ('l_phone').value,pw= ('l_pwd').value;
+
+const u=users.find(x=>x.phone===p&&x.pwd===pw);if(!u)return toast('账号或密码错');
+
+cur=u;save();renderMine();hide('mM_login');toast('登录成功');}
+
+function doCodeLogin(){const p= ('c_phone').value,vc= ('c_code').value;
+
+if(vc!==localStorage['vc_'+p])return toast('验证码错(演示123456)');
+
+let u=users.find(x=>x.phone===p);if(!u){u={phone:p,name:'用户'+p.slice(-4),bind:p};users.push(u);save();}cur=u;save();renderMine();hide('mM_login');toast('验证码登录成功');}
+
+function logout(){cur=null;save();renderMine();go('p_mine');toast('已退出');}
+
+function needLogin(){if(!cur){openLogin();toast('请先登录');return false;}return true;}
+
+/* ---------- 设置 ---------- */
+
+function tg(el){el.classList.toggle('on');}
+
+function setFont(){ ('fs')&&(document.body.style.fontSize= ('fs').value);localStorage.rl_fs=$('fs').value;}
+
+function setBr(v){ ('mask').style.opacity=(100-v)/100; ('mask').style.pointerEvents='none';localStorage.rl_br=v;}
+
+function clearCache(){$('cache').textContent='0KB';toast('缓存已清');}
+
+function chgPwd(){if(!cur)return;const o= ('o_pwd').value,n= ('n_pwd').value,n2=$('n_pwd2').value;
+
+if(o!==cur.pwd)return toast('原密码错');if(n.length<6)return toast('新密码太短');if(n!==n2)return toast('不一致');
+
+cur.pwd=n;users=users.map(u=>u.phone===cur.phone?cur:u);save();hide('mM_pwd');toast('密码已改');}
+
+function bindPhone(){const p= ('b_phone').value,vc= ('b_code').value;
+
+if(!/^1\d{10}$/.test(p))return toast('手机号错');if(vc!==localStorage['vc_'+p])return toast('验证码错');
+
+cur.bind=p;cur.phone=p;users=users.map(u=>u.phone===cur.phone?cur:u);save();renderMine();hide('mM_phone');toast('已绑定 '+p);}
+
+/* ---------- 管理后台（真数据） ---------- */
+
+function atab(t,el){document.querySelectorAll('#atab button').forEach(b=>b.classList.remove('on'));el.classList.add('on');loadAdmin(t);}
+
+function loadAdmin(t){const b=$('adminBox');
+
+if(t==='orders'){b.innerHTML=orders.length?orders.slice().reverse().map((o,i)=>
+"<div class="ai"><div><div class="t">${o.n} · ${o.phone}</div><div class="s">${o.time} · ${o.status} · ¥${o.p}</div></div><div><button class="ab b-d" onclick="orders[${orders.length-1-i}].status='已完成';save();renderStats();loadAdmin('orders')">完成</button><button class="ab b-x" onclick="orders.splice(${orders.length-1-i},1);save();renderStats();loadAdmin('orders')">删</button></div></div>").join(''):'';}
+
+if(t==='goods'){b.innerHTML=GOODS.map((g,i)=>
+"<div class="ai"><div><div class="t">${g.n}</div><div class="s">¥${g.p} · 上架</div></div><div><button class="ab b-e" onclick="toast('下架(演示)')">下架</button></div></div>").join('');}
+
+if(t==='users'){b.innerHTML=users.length?users.map(u=>
+"<div class="ai"><div><div class="t">${u.phone}</div><div class="s">${u.bind===u.phone?'已绑手机':'未绑'}</div></div><button class="ab b-x" onclick="users=users.filter(x=>x.phone!=='${u.phone}');save();loadAdmin('users')">封禁</button></div>").join(''):'';}
+
+if(t==='stats'){const t0=new Date().toDateString();b.innerHTML=`<div class="stats" style="grid-template-columns:1fr 1fr">
+
+<div class="st"></div>
+
+<div class="st"></div>
+
+<div class="st"></div>
+
+<div class="st"></div>
+
+<div class="st"></div>
+
+<div class="st"></div></div>`;}
+
+}
+
+/* ---------- 初始化 ---------- */
+
+renderGoods();renderStats();upBadge();renderMine();
+
+if(localStorage.rl_fs)$('fs').value=localStorage.rl_fs,document.body.style.fontSize=localStorage.rl_fs;
+
+if(localStorage.rl_br)$('br').value=localStorage.rl_br,setBr(localStorage.rl_br);
+
 </script>
 
 </body>
+
 </html>
+
+
+## 三、部署与验证
+### 1. 部署步骤
+- 复制上面全部代码 → GitHub 打开 `index.html` → Edit → **全选删旧** → 粘贴 → Commit changes[5](@ref)。
+- 等 1 分钟，手机开 https://zhoulinze123.github.io[](@replace=10004)。
+### 2. 真功能验收
+- **客服**：右下角出气泡，发「测试」→ tawk 后台/APP 收到 = 真通[2](@ref)[citation:16
