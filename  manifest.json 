@@ -1,9 +1,13 @@
 {
-  "name": "My PWA",
-  "short_name": "PWA",
-  "start_url": "/",
+  "name": "润林牧场 · 鲜肉商城",
+  "short_name": "润林牧场",
+  "description": "润林牧场鲜肉商城PWA应用",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8B4513",
   "icons": [
-    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512" }
+    { "src": "pork1.jpg.jpg", "type": "image/jpeg", "sizes": "512x512" }
   ]
 }
