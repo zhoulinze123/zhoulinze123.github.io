@@ -38,11 +38,6 @@ body{font-family:Arial,"PingFang SC",sans-serif;background:#f5f5f5;padding-botto
 .form-group label{display:block;margin-bottom:4px;font-size:13px;color:#333;font-weight:bold;}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px;border:1px solid #ccc;border-radius:5px;font-size:14px;}
 .save-btn{width:100%;padding:12px;background:#8B4513;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:15px;margin-top:10px;}
-.switch-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;}
-.switch{width:46px;height:24px;background:#ccc;border-radius:12px;position:relative;cursor:pointer;}
-.switch.on{background:#8B4513;}
-.switch::after{content:"";width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:.3s;}
-.switch.on::after{left:24px;}
 .order-item{background:#f9f9f9;border-radius:8px;padding:10px;margin-bottom:8px;}
 .msg-item{background:#f0f0f0;border-radius:8px;padding:10px;margin-bottom:8px;}
 .msg-item .msg-head{display:flex;justify-content:space-between;margin-bottom:4px;}
@@ -60,8 +55,7 @@ body{font-family:Arial,"PingFang SC",sans-serif;background:#f5f5f5;padding-botto
 .wfc .d{font-weight:bold;}
 .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;margin-right:4px;}
 .tag-red{background:#fee;color:#d00;}
-.tag-green{background:#efe;color:#0a0;}
-.tag-orange{background:#fef0e0;color:#D2691E;}
+.qr-img{width:200px;height:200px;display:block;margin:10px auto;border:1px solid #ddd;border-radius:8px;}
 </style>
 </head>
 <body>
@@ -153,16 +147,26 @@ body{font-family:Arial,"PingFang SC",sans-serif;background:#f5f5f5;padding-botto
   </div>
 </div>
 
-<!-- 联系客服 -->
+<!-- 联系客服（加了收款码） -->
 <div class="page" id="page-contact">
   <div class="section">
     <div class="section-title">💬 联系客服</div>
     <div style="text-align:center;padding:15px;">
       <div style="font-size:40px;">📞</div>
-      <div style="margin:8px 0;font-size:16px;">400-123-4567</div>
-      <div style="color:#666;font-size:13px;">微信：runlin123</div>
-      <button class="btn btn-green" style="margin-top:10px;" onclick="copyWechat()">复制微信号</button>
+      <div style="margin:8px 0;font-size:18px;font-weight:bold;">180-1145-2292</div>
+      <a href="tel:18011452292"><button class="btn btn-green" style="margin-top:5px;width:auto;padding:8px 20px;">一键拨号</button></a>
+      <div style="color:#666;font-size:13px;margin-top:10px;">微信：runlin123</div>
+      <button class="btn btn-green" style="margin-top:5px;width:auto;padding:8px 20px;" onclick="copyWechat()">复制微信号</button>
     </div>
+
+    <!-- 收款码 -->
+    <div style="background:#f9f9f9;border-radius:8px;padding:15px;margin:15px 0;text-align:center;">
+      <div style="font-weight:bold;margin-bottom:8px;">💰 微信收款码</div>
+      <div style="font-size:12px;color:#d00;margin-bottom:8px;">扫码付款请备注您的电话后4位</div>
+      <img src="/pork1.jpg.jpg" class="qr-img" alt="微信收款码" id="qrImg" onerror="this.outerHTML='<div style=\'color:#999;padding:20px;\'>收款码图片未上传，请到GitHub仓库上传收款码图片并命名为 qr-pay.jpg</div>'">
+      <button class="btn" style="margin-top:10px;" onclick="saveQr()">💾 保存收款码</button>
+    </div>
+
     <div class="section-title" style="font-size:14px;">📝 留言给客服</div>
     <div class="form-group"><label>姓名</label><input id="m-name" placeholder="您的姓名"></div>
     <div class="form-group"><label>电话</label><input id="m-phone" placeholder="您的手机号"></div>
@@ -232,13 +236,13 @@ body{font-family:Arial,"PingFang SC",sans-serif;background:#f5f5f5;padding-botto
     <div style="color:#666;font-size:13px;" id="profileArea">未选择地区</div>
   </div>
   <div class="section">
-    <div class="switch-row" onclick="showPage('orderform')"><span>📝 我要订货</span><span style="color:#999;">›</span></div>
-    <div class="switch-row" onclick="showPage('orders')"><span>📦 订货记录</span><span style="color:#999;">›</span></div>
-    <div class="switch-row" onclick="showPage('contact')"><span>💬 联系客服</span><span style="color:#999;">›</span></div>
-    <div class="switch-row" onclick="showPage('msgs')"><span>📋 客户留言 <span class="tag tag-red" id="msgBadge" style="display:none;">新</span></span><span style="color:#999;">›</span></div>
-    <div class="switch-row" onclick="showPage('settle')"><span>🏪 商家入驻</span><span style="color:#999;">›</span></div>
-    <div class="switch-row" onclick="showPage('settings')"><span>⚙️ 设置</span><span style="color:#999;">›</span></div>
-    <div class="switch-row" onclick="showPage('weight')"><span>⚖️ 称重换算</span><span style="color:#999;">›</span></div>
+    <div class="switch-row" onclick="showPage('orderform')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;"><span>📝 我要订货</span><span style="color:#999;">›</span></div>
+    <div class="switch-row" onclick="showPage('orders')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;"><span>📦 订货记录</span><span style="color:#999;">›</span></div>
+    <div class="switch-row" onclick="showPage('contact')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;"><span>💬 联系客服 / 付款</span><span style="color:#999;">›</span></div>
+    <div class="switch-row" onclick="showPage('msgs')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;"><span>📋 客户留言 <span class="tag tag-red" id="msgBadge" style="display:none;">新</span></span><span style="color:#999;">›</span></div>
+    <div class="switch-row" onclick="showPage('settle')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;"><span>🏪 商家入驻</span><span style="color:#999;">›</span></div>
+    <div class="switch-row" onclick="showPage('settings')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;"><span>⚙️ 设置</span><span style="color:#999;">›</span></div>
+    <div class="switch-row" onclick="showPage('weight')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;cursor:pointer;"><span>⚖️ 称重换算</span><span style="color:#999;">›</span></div>
   </div>
 </div>
 
@@ -252,7 +256,7 @@ body{font-family:Arial,"PingFang SC",sans-serif;background:#f5f5f5;padding-botto
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== 商品数据（改这里加商品）=====
+// ===== 商品数据 =====
 var goods = [
   {name:"鲜羊排 500g",price:68,stock:0,emoji:"🍖",cat:"羊"},
   {name:"羔羊肉卷 300g",price:45,stock:5,emoji:"🥩",cat:"羊"},
@@ -272,6 +276,12 @@ var cityData = {
   "北京":["北京市"],"重庆":["重庆市"],"四川":["成都","绵阳","德阳","南充","宜宾","泸州"],
   "广东":["广州","深圳","东莞","佛山","珠海"],"上海":["上海市"],
   "江苏":["南京","苏州","无锡","常州"],"浙江":["杭州","宁波","温州","嘉兴"],"其他":["待定"]
+};
+
+var cityCoord={
+  "成都市":[30.66,104.07],"重庆市":[29.56,106.55],"北京市":[39.90,116.40],
+  "广州市":[23.13,113.26],"深圳市":[22.54,114.06],"上海市":[31.23,121.47],
+  "南京市":[32.06,118.80],"苏州市":[31.30,120.62],"杭州市":[30.27,120.15],"宁波市":[29.87,121.55]
 };
 
 // ===== 渲染商品 =====
@@ -385,36 +395,4 @@ function submitMsg(){
 }
 
 function loadMsgs(){
-  var list=JSON.parse(localStorage.getItem("msgs")||"[]");
-  if(list.length===0){document.getElementById("msgList").innerHTML='<div style="text-align:center;color:#999;padding:20px;">暂无留言</div>';return;}
-  var html="";
-  for(var i=0;i<list.length;i++){
-    html+='<div class="msg-item"><div class="msg-head"><span class="msg-name">'+list[i].name+'</span><span class="msg-time">'+list[i].time+'</span></div><div class="msg-phone">📞 '+list[i].phone+'</div><div class="msg-text">'+list[i].text+'</div></div>';
-  }
-  document.getElementById("msgList").innerHTML=html;
-  document.getElementById("msgBadge").style.display="none";
-}
-
-function clearMsgs(){localStorage.removeItem("msgs");loadMsgs();showToast("已清空");}
-
-// ===== 商家入驻 =====
-function submitSettle(){
-  var d={
-    name:document.getElementById("s-name").value,
-    contact:document.getElementById("s-contact").value,
-    phone:document.getElementById("s-phone").value,
-    area:document.getElementById("s-area").value,
-    cat:document.getElementById("s-cat").value,
-    note:document.getElementById("s-note").value
-  };
-  if(!d.name||!d.phone){showToast("请填商家名称和电话");return;}
-  showToast("✅ 入驻申请已提交，我们会尽快审核联系您");
-}
-
-// ===== 设置 =====
-function onProvinceChange(){
-  var p=document.getElementById("p-province").value;
-  var c=document.getElementById("p-city");
-  c.innerHTML='<option value="">请选择城市</option>';
-  if(cityData[p]) for(var i=0;i<cityData[p].length;i++) c.innerHTML+='<option value="'+cityData[p][i]+'">'+cityData[p][i]+'</option>';
-  refreshWea
+  var list=JSON.par
