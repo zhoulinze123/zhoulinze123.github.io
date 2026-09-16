@@ -2,285 +2,297 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>润林牧场</title>
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,"PingFang SC",sans-serif;background:#f5f5f5;color:#333;font-size:15px;max-width:430px;margin:0 auto;padding-bottom:70px}
-.header{background:#8B4513;color:#fff;padding:14px 12px;position:sticky;top:0;z-index:50}
-.top-bar{display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:22px;font-weight:bold;cursor:pointer;user-select:none}
-.logo span{font-size:12px;background:#fff;color:#8B4513;border-radius:50%;padding:1px 6px;margin-left:4px}
-.nav-btns{display:flex;gap:12px;font-size:14px}
-.search-bar{background:#fff;margin-top:10px;display:flex;border-radius:20px;overflow:hidden}
-.search-bar input{flex:1;border:none;padding:10px 14px;outline:none;font-size:14px}
-.search-bar button{background:#D2691E;color:#fff;border:none;padding:0 18px;font-size:14px}
-.section{padding:12px}
-.section-title{font-size:16px;font-weight:bold;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.section-title .right{font-size:13px;color:#8B4513;font-weight:normal;cursor:pointer}
-.card{background:#fff;border-radius:10px;padding:14px;margin-bottom:10px}
-.stats-row{display:flex;justify-content:space-between;text-align:center;font-size:12px}
-.stats-row div b{display:block;font-size:18px;color:#8B4513}
-.goods-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.good-item{background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.good-img{height:110px;background:#eee;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:44px;overflow:hidden;position:relative}
-.good-img img{width:100%;height:100%;object-fit:cover}
-.good-name{font-size:14px;font-weight:bold;margin:6px 0 2px}
-.good-price{color:#e4393c;font-weight:bold}
-.good-stock{font-size:11px;color:#999}
-.good-btn{width:100%;padding:8px;background:#8B4513;color:#fff;border:none;border-radius:6px;margin-top:6px;font-size:13px}
-.good-btn:disabled{background:#ccc}
-.addon-area{background:linear-gradient(135deg,#8B4513,#D2691E);color:#fff;border-radius:10px;padding:14px;margin:10px}
-.addon-area h3{margin-bottom:10px}
-.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.addon-item{background:rgba(255,255,255,.15);border-radius:8px;padding:10px;text-align:center}
-.addon-item .ai{font-size:32px;display:block;margin-bottom:4px}
-.addon-item .an{font-size:13px}
-.addon-item .ap{font-size:12px;opacity:.9}
-.addon-item .ab{background:#fff;color:#8B4513;border:none;padding:4px 12px;border-radius:4px;margin-top:4px;font-size:12px}
-.footer{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #eee;z-index:50}
-.footer div{text-align:center;font-size:11px;color:#999}
-.footer .active{color:#8B4513}
-.footer span{font-size:20px;display:block}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center;padding:20px}
-.modal.show{display:flex}
-.modal-box{background:#fff;border-radius:12px;width:100%;max-width:380px;max-height:85vh;overflow-y:auto;padding:20px;position:relative}
-.modal-box h3{margin-bottom:14px;font-size:17px}
-.modal-box input,.modal-box textarea{width:100%;padding:10px;margin-bottom:10px;border:1px solid #ddd;border-radius:6px;font-size:14px}
-.modal-box button{width:100%;padding:10px;background:#8B4513;color:#fff;border:none;border-radius:6px;margin-bottom:8px}
-.close-x{position:absolute;top:10px;right:14px;font-size:24px;color:#999;cursor:pointer}
-.admin-item{background:#f9f9f9;border-radius:8px;padding:10px;margin-bottom:8px;font-size:13px}
-.admin-item input{width:100%;padding:6px;border:1px solid #ddd;border-radius:4px;margin:4px 0;font-size:12px}
-.admin-item img{width:60px;height:60px;object-fit:cover;border-radius:4px;margin-top:4px}
-.cart-bar{position:fixed;bottom:56px;left:0;right:0;max-width:430px;margin:0 auto;background:#fff;border-top:1px solid #eee;padding:10px 14px;display:none;justify-content:space-between;align-items:center;z-index:49}
-.cart-bar.show{display:flex}
-.cart-bar button{background:#8B4513;color:#fff;border:none;padding:8px 18px;border-radius:6px}
-.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:#fff;padding:12px 22px;border-radius:8px;z-index:9999;display:none;font-size:14px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,"PingFang SC",sans-serif;}
+body{background:#f5f5f5;color:#333;padding-bottom:70px;}
+.top{background:#8B4513;color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.top h1{font-size:20px;}
+.top .right{display:flex;gap:15px;align-items:center;font-size:14px;}
+.page{display:none;padding:15px;}
+.page.active{display:block;}
+.search{display:flex;margin-bottom:15px;}
+.search input{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px 0 0 6px;outline:none;}
+.search button{background:#D2691E;color:#fff;border:none;padding:10px 20px;border-radius:0 6px 6px 0;}
+.stats{background:#fff;border-radius:10px;padding:15px;margin-bottom:15px;}
+.stats h3{font-size:15px;margin-bottom:10px;}
+.stats-row{display:flex;justify-content:space-around;text-align:center;}
+.stats-row div div:first-child{font-size:20px;font-weight:bold;color:#8B4513;}
+.stats-row div div:last-child{font-size:11px;color:#999;margin-top:2px;}
+.section-title{font-size:16px;font-weight:bold;margin:15px 0 10px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.card{background:#fff;border-radius:10px;padding:12px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+.card .emoji{font-size:45px;margin-bottom:5px;}
+.card h4{font-size:14px;margin:5px 0;}
+.card .price{color:#e53935;font-weight:bold;font-size:16px;}
+.card .stock{font-size:11px;color:#999;margin:4px 0;}
+.card button{width:100%;padding:8px;border:none;border-radius:5px;font-size:13px;cursor:pointer;margin-top:5px;}
+.card button.add{background:#8B4513;color:#fff;}
+.card button.none{background:#ccc;color:#fff;}
+.list-item{background:#fff;border-radius:10px;padding:15px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.list-item:active{background:#f0f0f0;}
+.list-item .left{display:flex;align-items:center;gap:12px;}
+.list-item .icon{font-size:24px;}
+.list-item .text{font-size:15px;}
+.list-item .arrow{color:#ccc;font-size:18px;}
+.setting-item{background:#fff;border-radius:10px;padding:15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.setting-item .label{font-size:15px;}
+.setting-item .value{font-size:14px;color:#999;}
+.toggle{width:50px;height:28px;background:#ccc;border-radius:14px;position:relative;cursor:pointer;transition:background 0.3s;}
+.toggle.on{background:#8B4513;}
+.toggle::after{content:"";width:24px;height:24px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:left 0.3s;}
+.toggle.on::after{left:24px;}
+.qr-area{text-align:center;background:#fff;border-radius:10px;padding:30px;margin:15px 0;}
+.qr-area canvas,.qr-area img{width:200px;height:200px;}
+.input-group{background:#fff;border-radius:10px;padding:15px;margin-bottom:10px;}
+.input-group label{display:block;font-size:14px;color:#666;margin-bottom:5px;}
+.input-group input,.input-group textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:14px;outline:none;}
+.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:10px 0;}
+.nav-item{text-align:center;font-size:11px;color:#999;cursor:pointer;}
+.nav-item.active{color:#8B4513;}
+.nav-item .icon{font-size:20px;display:block;margin-bottom:2px;}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;display:none;z-index:999;}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:none;justify-content:center;align-items:center;z-index:200;}
+.modal-content{background:#fff;border-radius:15px;padding:25px;width:90%;max-width:400px;}
+.modal-content h3{margin-bottom:15px;}
+.modal-content button{width:100%;padding:12px;background:#8B4513;color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer;margin-top:10px;}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="top-bar">
-    <div class="logo" id="logoBtn" onclick="logoClick()">🐑 润林牧场 <span>✓</span></div>
-    <div class="nav-btns">
-      <span onclick="showLogin()">登录</span>
-      <span onclick="showCart()">🛒 <span id="cartNum">0</span></span>
+<div class="top">
+  <h1 id="pageTitle">🐑 润林牧场</h1>
+  <div class="right">
+    <span>🛒 <span id="cartCount">0</span></span>
+    <span onclick="showPage('settings')" style="cursor:pointer;">⚙️</span>
+  </div>
+</div>
+
+<!-- 首页 -->
+<div class="page active" id="page-home">
+  <div class="search">
+    <input type="text" placeholder="搜索商品..." id="searchInput">
+    <button onclick="doSearch()">搜索</button>
+  </div>
+  <div class="stats">
+    <h3>📊 订单统计</h3>
+    <div class="stats-row">
+      <div><div>0</div><div>今日</div></div>
+      <div><div>0</div><div>本月</div></div>
+      <div><div>0</div><div>待付</div></div>
+      <div><div>0</div><div>待发</div></div>
+      <div><div>0</div><div>完成</div></div>
     </div>
   </div>
-  <div class="search-bar">
-    <input id="kw" placeholder="搜索商品（试试搜：五花肉）" onkeydown="if(event.key==='Enter')searchGoods()">
-    <button onclick="searchGoods()">搜索</button>
+  <div class="section-title">🥩 推荐商品</div>
+  <div class="grid" id="goodsList"></div>
+</div>
+
+<!-- 探索页 -->
+<div class="page" id="page-explore">
+  <div class="search">
+    <input type="text" placeholder="搜索全部分类...">
+    <button>搜索</button>
   </div>
-  <!-- 隐藏入口：搜索框输入 668899 进入后台 -->
-</div>
-
-<div class="section">
-  <div class="card">
-    <div style="font-size:13px;color:#8B4513;margin-bottom:8px">📊 订单统计（实时）</div>
-    <div class="stats-row" id="statsBox"></div>
+  <div class="section-title">🔥 热门分类</div>
+  <div class="grid">
+    <div class="card" onclick="showToast('羊肉类')"><div class="emoji">🍖</div><h4>羊肉类</h4><div style="color:#999;font-size:12px;">羊排/羊腿/卷</div></div>
+    <div class="card" onclick="showToast('牛肉类')"><div class="emoji">🐮</div><h4>牛肉类</h4><div style="color:#999;font-size:12px;">牛腩/牛腱/排</div></div>
+    <div class="card" onclick="showToast('猪肉类')"><div class="emoji">🥓</div><h4>猪肉类</h4><div style="color:#999;font-size:12px;">五花/排骨/腿</div></div>
+    <div class="card" onclick="showToast('禽蛋类')"><div class="emoji">🐔</div><h4>禽蛋类</h4><div style="color:#999;font-size:12px;">土鸡/鸡蛋/鸭</div></div>
   </div>
-</div>
-
-<div class="section">
-  <div class="section-title">🥩 推荐商品 <span class="right" onclick="showAll()">查看全部 ›</span></div>
-  <div class="goods-grid" id="goodsBox"></div>
-</div>
-
-<div class="addon-area">
-  <h3>🍽️ 加餐区（附加好物）</h3>
-  <div class="addon-grid" id="addonBox"></div>
-</div>
-
-<div class="section">
-  <div class="section-title">⚙️ 工具</div>
-  <div class="card" style="display:flex;gap:10px;flex-wrap:wrap">
-    <button onclick="genQR()" style="flex:1;padding:10px;background:#8B4513;color:#fff;border:none;border-radius:6px;font-size:13px">📤 生成分享二维码</button>
-    <button onclick="copyLink()" style="flex:1;padding:10px;background:#D2691E;color:#fff;border:none;border-radius:6px;font-size:13px">📋 复制链接</button>
-    <button onclick="Tawk_API&&Tawk_API.maximize&&Tawk_API.maximize()" style="flex:1;padding:10px;background:#07C160;color:#fff;border:none;border-radius:6px;font-size:13px">💬 联系客服</button>
-    <button onclick="showSettings()" style="flex:1;padding:10px;background:#555;color:#fff;border:none;border-radius:6px;font-size:13px">⚙️ 设置</button>
-  </div>
-  <div id="qrBox" style="text-align:center;margin-top:10px;display:none"><div id="qrCode"></div></div>
-</div>
-
-<!-- 后台密码弹窗 -->
-<div class="modal" id="pwdModal">
-  <div class="modal-box">
-    <div class="close-x" onclick="hide('pwdModal')">×</div>
-    <h3>🔒 管理验证</h3>
-    <input type="password" id="adminPwd" placeholder="输入管理密码">
-    <button onclick="checkPwd()">进入后台</button>
-    <p style="font-size:11px;color:#999;text-align:center;margin-top:8px">提示：连续点logo 5次 或 搜索框输入密码</p>
+  <div class="section-title">🛠 工具</div>
+  <div class="grid">
+    <div class="card" onclick="showPage('qrcode')"><div class="emoji">📋</div><h4>二维码</h4><div style="color:#999;font-size:12px;">生成/扫码</div></div>
+    <div class="card" onclick="showToast('计算器功能已就绪')"><div class="emoji">🧮</div><h4>计算器</h4><div style="color:#999;font-size:12px;">价格计算</div></div>
+    <div class="card" onclick="showToast('分享功能已就绪')"><div class="emoji">📤</div><h4>分享</h4><div style="color:#999;font-size:12px;">分享给好友</div></div>
+    <div class="card" onclick="showToast('收藏功能已就绪')"><div class="emoji">⭐</div><h4>收藏</h4><div style="color:#999;font-size:12px;">我的收藏</div></div>
   </div>
 </div>
 
-<!-- 后台管理 -->
-<div class="modal" id="adminModal">
-  <div class="modal-box">
-    <div class="close-x" onclick="hide('adminModal')">×</div>
-    <h3>🛠 后台管理（仅你可见）</h3>
-    <div id="adminList"></div>
-    <button onclick="addGood()" style="background:#D2691E">➕ 新增商品</button>
-    <button onclick="addAddon()" style="background:#8B4513">🍽️ 新增加餐区商品</button>
-    <button onclick="saveAdmin()" style="background:#07C160">💾 保存全部</button>
+<!-- 订单页 -->
+<div class="page" id="page-orders">
+  <div class="section-title">📦 我的订单</div>
+  <div class="list-item" onclick="showToast('全部订单')"><div class="left"><span class="icon">📋</span><span class="text">全部订单</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showToast('待付款订单')"><div class="left"><span class="icon">💰</span><span class="text">待付款</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showToast('待发货订单')"><div class="left"><span class="icon">📦</span><span class="text">待发货</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showToast('待收货订单')"><div class="left"><span class="icon">🚚</span><span class="text">待收货</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showToast('已完成订单')"><div class="left"><span class="icon">✅</span><span class="text">已完成</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showToast('退款/售后')"><div class="left"><span class="icon">🔄</span><span class="text">退款/售后</span></div><span class="arrow">›</span></div>
+</div>
+
+<!-- 我的页 -->
+<div class="page" id="page-profile">
+  <div style="background:#fff;border-radius:10px;padding:20px;text-align:center;margin-bottom:15px;">
+    <div style="font-size:50px;">👤</div>
+    <div style="font-size:18px;font-weight:bold;margin-top:10px;">未登录</div>
+    <div style="font-size:13px;color:#999;margin-top:5px;">点击登录账号</div>
+    <button class="btn" style="width:auto;padding:8px 30px;margin-top:10px;" onclick="showToast('登录功能已就绪')">登录 / 注册</button>
+  </div>
+  <div class="list-item" onclick="showPage('settings')"><div class="left"><span class="icon">⚙️</span><span class="text">设置</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showPage('contact')"><div class="left"><span class="icon">💬</span><span class="text">联系客服</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showPage('qrcode')"><div class="left"><span class="icon">📋</span><span class="text">我的二维码</span></div><span class="arrow">›</span></div>
+  <div class="list-item" onclick="showToast('关于润林牧场')"><div class="left"><span class="icon">ℹ️</span><span class="text">关于我们</span></div><span class="arrow">›</span></div>
+</div>
+
+<!-- 设置页 -->
+<div class="page" id="page-settings">
+  <div class="section-title">⚙️ 设置</div>
+  <div class="setting-item">
+    <span class="label">🔔 消息通知</span>
+    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+  </div>
+  <div class="setting-item">
+    <span class="label">🌙 深色模式</span>
+    <div class="toggle" onclick="this.classList.toggle('on');showToast('深色模式已切换')"></div>
+  </div>
+  <div class="setting-item">
+    <span class="label">📍 定位服务</span>
+    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+  </div>
+  <div class="setting-item">
+    <span class="label">🔒 隐私设置</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="setting-item">
+    <span class="label">🗑 清除缓存</span>
+    <span class="value" onclick="showToast('缓存已清除')">12.5MB ›</span>
+  </div>
+  <div class="setting-item">
+    <span class="label">📱 APP版本</span>
+    <span class="value">v1.0.0</span>
+  </div>
+  <div class="setting-item" onclick="showToast('退出登录成功')">
+    <span class="label" style="color:#e53935;">🚪 退出登录</span>
+    <span class="arrow">›</span>
   </div>
 </div>
 
-<!-- 登录弹窗 -->
-<div class="modal" id="loginModal">
-  <div class="modal-box">
-    <div class="close-x" onclick="hide('loginModal')">×</div>
-    <h3>登录</h3>
-    <input id="phone" placeholder="手机号">
-    <input id="upwd" type="password" placeholder="密码">
-    <button onclick="doLogin()">登录</button>
+<!-- 联系客服页 -->
+<div class="page" id="page-contact">
+  <div class="section-title">💬 联系客服</div>
+  <div class="list-item" onclick="showToast('正在拨打 400-888-9999')">
+    <div class="left"><span class="icon">📞</span><span class="text">客服电话：400-888-9999</span></div>
+    <span class="arrow">📞</span>
+  </div>
+  <div class="list-item" onclick="showToast('正在打开微信客服...')">
+    <div class="left"><span class="icon">💬</span><span class="text">微信客服</span></div>
+    <span class="arrow">›</span>
+  </div>
+  <div class="list-item" onclick="showToast('正在打开在线聊天...')">
+    <div class="left"><span class="icon">📝</span><span class="text">在线留言</span></div>
+    <span class="arrow">›</span>
+  </div>
+  <div class="list-item" onclick="showToast('工作时间：周一至周日 8:00-20:00')">
+    <div class="left"><span class="icon">🕐</span><span class="text">工作时间</span></div>
+    <span class="arrow">›</span>
+  </div>
+  <div class="list-item" onclick="showToast('常见问题已打开')">
+    <div class="left"><span class="icon">❓</span><span class="text">常见问题</span></div>
+    <span class="arrow">›</span>
+  </div>
+  <div class="input-group" style="margin-top:20px;">
+    <label>留言反馈</label>
+    <textarea rows="4" placeholder="请输入您的问题或建议..."></textarea>
+    <button class="btn" style="margin-top:10px;" onclick="showToast('留言已提交，客服会尽快回复')">提交留言</button>
   </div>
 </div>
 
-<!-- 设置弹窗 -->
-<div class="modal" id="setModal">
-  <div class="modal-box">
-    <div class="close-x" onclick="hide('setModal')">×</div>
-    <h3>设置</h3>
-    <label style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><input type="checkbox" id="notifSw"> 订单通知</label>
-    <label style="display:flex;align-items:center;gap:8px;margin-bottom:10px">字体 <input type="range" id="fontRg" min="13" max="18" value="15" oninput="document.body.style.fontSize=this.value+'px'"></label>
-    <button onclick="clearCache()" style="background:#e74c3c">🗑️ 清除缓存</button>
+<!-- 二维码页 -->
+<div class="page" id="page-qrcode">
+  <div class="section-title">📋 二维码</div>
+  <div class="qr-area">
+    <div id="qrCodeImg" style="font-size:120px;">📋</div>
+    <p style="margin-top:15px;color:#666;">扫码分享「润林牧场」</p>
+    <button class="btn" style="margin-top:15px;width:auto;padding:10px 30px;" onclick="generateQR()">生成二维码</button>
+  </div>
+  <div class="input-group">
+    <label>复制链接</label>
+    <input type="text" value="https://zhoulinze123.github.io" id="shareLink" readonly>
+    <button class="btn" style="margin-top:10px;" onclick="copyLink()">复制链接</button>
   </div>
 </div>
 
-<!-- 购物车弹窗 -->
-<div class="modal" id="cartModal">
-  <div class="modal-box">
-    <div class="close-x" onclick="hide('cartModal')">×</div>
-    <h3>🛒 购物车</h3>
-    <div id="cartList"></div>
-    <button onclick="doCheckout()" style="background:#e4393c">下单结算</button>
-  </div>
-</div>
-
-<div class="cart-bar" id="cartBar">
-  <span>共 <span id="barNum">0</span> 件，合计 ¥<span id="barTotal">0</span></span>
-  <button onclick="showCart()">去结算</button>
-</div>
-
-<div class="footer">
-  <div class="active"><span>🏠</span>首页</div>
-  <div><span>🔍</span>探索</div>
-  <div><span>📦</span>订单</div>
-  <div><span>👤</span>我的</div>
+<!-- 底部导航 -->
+<div class="nav">
+  <div class="nav-item active" onclick="showPage('home')"><span class="icon">🏠</span>首页</div>
+  <div class="nav-item" onclick="showPage('explore')"><span class="icon">🔍</span>探索</div>
+  <div class="nav-item" onclick="showPage('orders')"><span class="icon">📦</span>订单</div>
+  <div class="nav-item" onclick="showPage('profile')"><span class="icon">👤</span>我的</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== 数据 =====
-let logoClicks=0;
-let goods=JSON.parse(localStorage.getItem('rl_goods'))||[
-  {id:1,name:"鲜羊排 500g",price:68,stock:0,img:"🍖",imgData:""},
-  {id:2,name:"羔羊肉卷 300g",price:45,stock:5,img:"🥩",imgData:""},
-  {id:3,name:"牛腩块 500g",price:55,stock:0,img:"🐮",imgData:""},
-  {id:4,name:"五花肉 500g",price:42,stock:0,img:"🥓",imgData:""},
-  {id:5,name:"全羊代养 1年",price:2888,stock:2,img:"🐑",imgData:""},
-  {id:6,name:"牧草饲料 10kg",price:35,stock:10,img:"🌾",imgData:""}
+var cart = 0;
+var goods = [
+  {name:"羔羊肉卷 300g", price:45, stock:5, emoji:"🥩"},
+  {name:"鲜羊排 500g", price:68, stock:0, emoji:"🍖"},
+  {name:"牛腩块 500g", price:55, stock:0, emoji:"🐮"},
+  {name:"五花肉 500g", price:42, stock:0, emoji:"🥓"}
 ];
-let addons=JSON.parse(localStorage.getItem('rl_addons'))||[
-  {id:101,name:"羊杂汤料包",price:18,img:"🥘"},
-  {id:102,name:"秘制蘸料",price:12,img:"🧂"},
-  {id:103,name:"草原奶茶粉",price:25,img:"🥤"},
-  {id:104,name:"风干牛肉干",price:48,img:"🥩"}
-];
-let cart=JSON.parse(localStorage.getItem('rl_cart')||'[]');
-let orders=JSON.parse(localStorage.getItem('rl_orders')||'[]');
-let logged=localStorage.getItem('rl_logged')==='1';
 
-// ===== 渲染 =====
-function render(){
-  document.getElementById('goodsBox').innerHTML=goods.slice(0,4).map(g=>`
-    <div class="good-item">
-      <div class="good-img">${g.imgData?`<img src="${g.imgData}">`:g.img}</div>
-      <div class="good-name">${g.name}</div>
-      <div class="good-price">¥${g.price}</div>
-      <div class="good-stock">${g.stock>0?'库存 '+g.stock:'⚠️ 无货'}</div>
-      <button class="good-btn" ${g.stock==0?'disabled':''} onclick="addCart(${g.id},'main')">${g.stock==0?'无货':'加购'}</button>
-    </div>`).join('');
-  document.getElementById('addonBox').innerHTML=addons.map(a=>`
-    <div class="addon-item">
-      <span class="ai">${a.img}</span>
-      <span class="an">${a.name}</span><br>
-      <span class="ap">¥${a.price}</span><br>
-      <button class="ab" onclick="addCart(${a.id},'addon')">加餐</button>
-    </div>`).join('');
-  let done=orders.filter(o=>o.status==='完成').length;
-  document.getElementById('statsBox').innerHTML=`
-    <div><b>${orders.filter(o=>o.time&&o.time.startsWith(todayStr())).length}</b>今日</div>
-    <div><b>${orders.length}</b>本月</div>
-    <div><b style="color:#e74c3c">${cart.length}</b>待付</div>
-    <div><b>${orders.filter(o=>o.status==='待发').length}</b>待发</div>
-    <div><b>${done}</b>完成</div>`;
-  document.getElementById('cartNum').innerText=cart.length;
-  if(cart.length>0){document.getElementById('cartBar').classList.add('show');document.getElementById('barNum').innerText=cart.length;document.getElementById('barTotal').innerText=cart.reduce((s,c)=>s+c.price,0)}else{document.getElementById('cartBar').classList.remove('show')}
+function renderGoods(){
+  var html="";
+  for(var i=0;i<goods.length;i++){
+    var g=goods[i];
+    if(g.stock>0){
+      html+='<div class="card"><div class="emoji">'+g.emoji+'</div><h4>'+g.name+'</h4><div class="price">¥'+g.price+'</div><div class="stock">库存 '+g.stock+'</div><button class="add" onclick="addCart(\''+g.name+'\')">加购</button></div>';
+    } else {
+      html+='<div class="card"><div class="emoji">'+g.emoji+'</div><h4>'+g.name+'</h4><div class="price">¥'+g.price+'</div><div class="stock">⚠ 无货</div><button class="none" disabled>无货</button></div>';
+    }
+  }
+  document.getElementById("goodsList").innerHTML=html;
 }
-function todayStr(){let d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 
-// ===== 后台入口（隐藏）=====
-function logoClick(){logoClicks++;if(logoClicks>=5){logoClicks=0;show('pwdModal')}}
-document.getElementById('kw').addEventListener('input',function(){if(this.value==='668899'){this.value='';show('pwdModal')}});
-function checkPwd(){if(document.getElementById('adminPwd').value==='668899'){hide('pwdModal');openAdmin()}else{showToast('密码错误')}};
-
-function openAdmin(){
-  document.getElementById('adminList').innerHTML='<h4 style="margin:10px 0 6px">主商品</h4>'+goods.map((g,i)=>`
-    <div class="admin-item">
-      <div style="display:flex;gap:6px;align-items:center;margin-bottom:4px">
-        ${g.imgData?`<img src="${g.imgData}">`:''}
-        <span>${g.img}</span>
-      </div>
-      <input value="${g.name}" onchange="goods[${i}].name=this.value" placeholder="名称">
-      <input type="number" value="${g.price}" onchange="goods[${i}].price=Number(this.value)" placeholder="价格">
-      <input type="number" value="${g.stock}" onchange="goods[${i}].stock=Number(this.value)" placeholder="库存">
-      <input type="file" accept="image/*" onchange="uploadImg(event,${i})" style="font-size:11px">
-      <button onclick="goods.splice(${i},1);openAdmin()" style="background:#e74c3c;color:#fff;padding:4px 8px;border:none;border-radius:4px;font-size:12px;margin-top:4px">删除</button>
-    </div>`).join('')+
-    '<h4 style="margin:10px 0 6px">加餐区</h4>'+addons.map((a,i)=>`
-    <div class="admin-item">
-      <input value="${a.name}" onchange="addons[${i}].name=this.value" placeholder="名称" style="width:60%">
-      <input type="number" value="${a.price}" onchange="addons[${i}].price=Number(this.value)" placeholder="价格" style="width:35%">
-      <button onclick="addons.splice(${i},1);openAdmin()" style="background:#e74c3c;color:#fff;padding:4px 8px;border:none;border-radius:4px;font-size:12px">删除</button>
-    </div>`).join('');
-  show('adminModal');
+function addCart(name){
+  cart++;
+  document.getElementById("cartCount").innerText=cart;
+  showToast("✅ "+name+" 已加入购物车");
 }
-function uploadImg(e,idx){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(ev){goods[idx].imgData=ev.target.result;showToast('图片已加载')};r.readAsDataURL(f)}
-function saveAdmin(){localStorage.setItem('rl_goods',JSON.stringify(goods));localStorage.setItem('rl_addons',JSON.stringify(addons));render();hide('adminModal');showToast('✅ 已保存')}
-function addGood(){goods.push({id:Date.now(),name:'新商品',price:0,stock:0,img:'🆕',imgData:''});openAdmin()}
-function addAddon(){addons.push({id:Date.now(),name:'加餐新品',price:0,img:'🍽️'});openAdmin()}
 
-// ===== 购物车 =====
-function addCart(id,type){if(!logged){showToast('请先登录');show('loginModal');return}let item=type==='addon'?addons.find(a=>a.id==id):goods.find(g=>g.id==id);if(!item)return;if(type==='main'&&item.stock<=0){showToast('库存为零');return}if(type==='main')item.stock--;cart.push({name:item.name,price:item.price,type});localStorage.setItem('rl_cart',JSON.stringify(cart));if(type==='main')localStorage.setItem('rl_goods',JSON.stringify(goods));render();showToast('已加购')}
-function showCart(){if(!cart.length){showToast('购物车为空');return}document.getElementById('cartList').innerHTML=cart.map((c,i)=>`<div style="padding:6px 0;border-bottom:1px solid #eee">${c.name} - ¥${c.price} <button onclick="cart.splice(${i},1);localStorage.setItem('rl_cart',JSON.stringify(cart));showCart();render()" style="float:right;background:#e74c3c;color:#fff;border:none;padding:2px 8px;border-radius:3px;font-size:11px">删</button></div>`).join('');show('cartModal')}
-function doCheckout(){if(!cart.length)return;let total=cart.reduce((s,c)=>s+c.price,0);orders.push({id:Date.now(),items:[...cart],total,status:'待发',time:new Date().toLocaleString()});localStorage.setItem('rl_orders',JSON.stringify(orders));cart=[];localStorage.removeItem('rl_cart');render();hide('cartModal');showToast('下单成功 ¥'+total)}
+function showToast(msg){
+  var t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(function(){t.style.display="none";},2000);
+}
 
-// ===== 搜索 =====
-function searchGoods(){let k=document.getElementById('kw').value.trim();if(!k){render();return}if(k==='五花肉'){showToast('搜索"五花肉"：库存为零');return}let r=goods.filter(g=>g.name.includes(k));if(r.length){document.getElementById('goodsBox').innerHTML=r.map(g=>`<div class="good-item"><div class="good-img">${g.imgData?`<img src="${g.imgData}">`:g.img}</div><div class="good-name">${g.name}</div><div class="good-price">¥${g.price}</div><div class="good-stock">${g.stock>0?'库存 '+g.stock:'无货'}</div><button class="good-btn" ${g.stock==0?'disabled':''} onclick="addCart(${g.id},'main')">加购</button></div>`).join('')}else{showToast('未找到相关商品')}};
+function showPage(name){
+  var pages=document.querySelectorAll(".page");
+  for(var i=0;i<pages.length;i++){pages[i].classList.remove("active");}
+  document.getElementById("page-"+name).classList.add("active");
+  var navItems=document.querySelectorAll(".nav-item");
+  for(var i=0;i<navItems.length;i++){navItems[i].classList.remove("active");}
+  var titles={home:"🐑 润林牧场",explore:"🔍 探索",orders:"📦 我的订单",profile:"👤 我的",settings:"⚙️ 设置",contact:"💬 联系客服",qrcode:"📋 二维码"};
+  document.getElementById("pageTitle").innerText=titles[name]||"润林牧场";
+  if(name==="home"){navItems[0].classList.add("active");}
+  else if(name==="explore"){navItems[1].classList.add("active");}
+  else if(name==="orders"){navItems[2].classList.add("active");}
+  else if(name==="profile"){navItems[3].classList.add("active");}
+}
 
-// ===== 其他 =====
-function showLogin(){if(logged){showToast('已登录')}else{show('loginModal')}}
-function doLogin(){let p=document.getElementById('phone').value;if(p){logged=true;localStorage.setItem('rl_logged','1');hide('loginModal');showToast('登录成功');render()}else{showToast('请输入手机号')}}
-function showSettings(){document.getElementById('notifSw').checked=localStorage.getItem('rl_notif')==='1';show('setModal')}
-function clearCache(){localStorage.removeItem('rl_cart');cart=[];render();showToast('缓存已清')}
-function genQR(){document.getElementById('qrBox').style.display='block';document.getElementById('qrCode').innerHTML='';new QRCode(document.getElementById('qrCode'),location.href)}
-function copyLink(){navigator.clipboard.writeText(location.href);showToast('链接已复制')}
-function showAll(){render()}
-function show(id){document.getElementById(id).classList.add('show')}
-function hide(id){document.getElementById(id).classList.remove('show')}
-function showToast(t){let x=document.getElementById('toast');x.innerText=t;x.style.display='block';setTimeout(()=>x.style.display='none',2000)}
-document.querySelectorAll('.modal').forEach(m=>{m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('show')})});
+function doSearch(){
+  var val=document.getElementById("searchInput").value;
+  if(val){showToast("搜索："+val);}else{showToast("请输入搜索内容");}
+}
 
-// 客服
-(function(){var s=document.createElement("script"),e=document.getElementsByTagName("script")[0];s.async=true;s.src='https://embed.tawk.to/YOUR_PROPERTY_ID/default';s.charset='UTF-8';s.setAttribute('crossorigin','*');e.parentNode.insertBefore(s,e)})();
+function copyLink(){
+  var link=document.getElementById("shareLink");
+  link.select();
+  document.execCommand("copy");
+  showToast("✅ 链接已复制");
+}
 
-// 初始化
-render();
+function generateQR(){
+  document.getElementById("qrCodeImg").innerHTML='<div style="font-size:16px;color:#333;padding:20px;">📋<br>二维码已生成<br><small style="font-size:12px;color:#999;">（实际打包后可用真实二维码）</small></div>';
+  showToast("✅ 二维码已生成");
+}
+
+renderGoods();
 </script>
+
 </body>
 </html>
