@@ -1,19 +1,9 @@
 {
-  "name": "润林牧场",
-  "short_name": "润林牧场",
-  "description": "新鲜牛羊肉直达",
+  "name": "My PWA",
+  "short_name": "PWA",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#8B4513",
-  "theme_color": "#8B4513",
   "icons": [
-    {
-      "src": "/pork1.jpg.jpg",
-      "type": "image/jpeg",
-      "sizes": "512x512",
-      "purpose": "any maskable"
-    }
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512" }
   ]
 }
