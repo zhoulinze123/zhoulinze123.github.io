@@ -12,12 +12,8 @@
     {
       "src": "/pork1.jpg.jpg",
       "type": "image/jpeg",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/pork1.jpg.jpg",
-      "type": "image/jpeg",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ]
 }
