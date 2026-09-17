@@ -1,21 +1,21 @@
 {
-  "name": "My PWA App",
-  "short_name": "PWA",
-  "description": "A progressive web app demo",
-  "start_url": "./",
+  "name": "我的PWA应用",
+  "short_name": "PWA应用",
+  "description": "这是一个渐进式网页应用测试",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "./icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
     },
     {
-      "src": "./icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ]
 }
