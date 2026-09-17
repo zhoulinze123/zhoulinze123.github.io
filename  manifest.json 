@@ -1,7 +1,7 @@
 {
   "name": "润林牧场 · 鲜肉商城",
   "short_name": "润林牧场",
-  "description": "润林牧场鲜肉商城，提供新鲜优质肉类配送服务",
+  "description": "润林牧场鲜肉商城，提供新鲜优质肉类",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
