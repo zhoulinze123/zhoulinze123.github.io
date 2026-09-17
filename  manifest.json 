@@ -1,21 +1,24 @@
 {
-  "name": "我的PWA应用",
-  "short_name": "PWA应用",
-  "description": "这是一个渐进式网页应用测试",
-  "start_url": "/",
+  "name": "润林牧场 · 鲜肉商城",
+  "short_name": "润林牧场",
+  "description": "润林牧场鲜肉商城，提供新鲜优质肉类",
+  "id": "./",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#8B4513",
   "icons": [
     {
       "src": "icon_192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
       "src": "icon_512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
     }
   ]
 }
