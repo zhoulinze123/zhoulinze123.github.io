@@ -319,7 +319,31 @@ function autoLocate() {
   }, {timeout: 1500});
 }
 
-// 初始化
+<!-- 分享按钮 -->
+<div style="margin:12px 16px;">
+  <button onclick="shareShop()" style="width:100%;padding:12px;background:#ff7800;color:#fff;border:none;border-radius:8px;font-size:16px;">📤 分享店铺给好友</button>
+</div>
+
+<script>
+function shareShop(){
+  const shareData = {
+    title:"润林牧场农家生鲜",
+    text:"农家散养土猪土鸡，点链接进店选购",
+    url:"https://zhoulinze123.github.io/zhoulinze123.github.io/"
+  }
+  if(navigator.share){
+    navigator.share(shareData).catch(err=>{
+      copyLink();
+    })
+  }else{
+    copyLink();
+  }
+}
+function copyLink(){
+  navigator.clipboard.writeText("https://zhoulinze123.github.io/zhoulinze123.github.io/");
+  alert("链接已经复制！粘贴发给微信好友即可");
+}
+</script>
 renderGoodsList(goods, 'homeGoodsList');
 autoLocate();
 </script>
