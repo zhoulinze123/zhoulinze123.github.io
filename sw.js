@@ -1,23 +1,24 @@
-const CACHE_NAME = 'pwa-cache-v1';
-const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png'
+const CACHE_NAME = "runlin‑v1";
+const FILES_TO_CACHE = [
+  "./",
+  "./index.html"
 ];
 
-self.addEventListener('install', e => {
+self.addEventListener("install", (evt) => {
+  evt.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
   self.skipWaiting();
-  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil(clients.claim());
+self.addEventListener("activate", (evt) => {
+  evt.waitUntil(self.clients.claim());
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(resp => resp || fetch(event.request))
+self.addEventListener("fetch", (evt) => {
+  evt.respondWith(
+    caches.match(evt.request).then(res => res || fetch(evt.request))
   );
 });
