@@ -1,0 +1,16 @@
+{
+  "name": "润林牧场",
+  "short_name": "润林牧场",
+  "description": "润林牧场订货小程序",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#228B22",
+  "icons": [
+    {
+      "src": "./icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
